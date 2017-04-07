@@ -3,11 +3,10 @@
 namespace Widget\controllers\cockpit;
 
 use app\controllers\cockpit\CockpitController;
-use System\Session;
 use System\Router;
 
 use Widget\models\Gallery;
-use Media\models\Media;
+use Widget\models\GalleryMedia;
 
 class GalleriesController extends CockpitController
 {
@@ -46,9 +45,12 @@ class GalleriesController extends CockpitController
             $this->gallery = Gallery::findById($id);
         }
 
+        $galleriesmedias = GalleryMedia::findAll('id = '.$this->gallery->id);
+
         $this->render('edit', array(
             'id' => $id,
             'gallery' => $this->gallery,
+            'galleriesmedias' => $galleriesmedias,
             'pageTitle' => 'Modification gallerie n°'.$id,
             'formAction' => Router::url('cockpit_widget_galleries_update_'.$id)
         ));
@@ -87,7 +89,7 @@ class GalleriesController extends CockpitController
         $this->gallery->setData($this->request->post);
 
         if ($this->gallery->valid()) {
-            if ($this->gallery->update((array)$this->media)) {
+            if ($this->gallery->update((array)$this->gallery)) {
                 Session::addFlash('Gallerie modifiée', 'success');
                 $this->redirect('cockpit_widget_galleries');
             } else {

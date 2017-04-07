@@ -4,6 +4,6 @@ namespace Widget\models;
 
 use System\Model;
 
-class Gallery extends Widget
+class Widget extends Model
 {
 }

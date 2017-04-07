@@ -3,7 +3,6 @@
 namespace Widget\models;
 
 use System\Model;
-use Catalog\models\Media;
 
 class GalleryMedia extends Widget
 {
@@ -12,8 +11,14 @@ class GalleryMedia extends Widget
         'media_id',
         'title',
         'description',
+        'position',
         'active'
     );
+
+    public static function getTableName()
+    {
+        return 'galleries_medias';
+    }
 
     /**
      * Get list of associed table(s)
@@ -23,11 +28,30 @@ class GalleryMedia extends Widget
     public function getAssociations()
     {
         return array(
-            'medias' => array(
+            'gallery' => array(
+                'type' => '1',
+                'model' => 'Widget\\models\\Gallery',
+                'key' => 'gallery_id'
+            ),
+            'media' => array(
                 'type' => '1',
                 'model' => 'Catalog\\models\\Media',
                 'key' => 'media_id'
             )
         );
+    }
+
+    public function getValidations()
+    {
+        $validations = parent::getValidations();
+
+        $validations = array_merge($validations, array(
+            'media_id' => array(
+                'type' => 'required',
+                'error' => 'Media obligatoire'
+            )
+        ));
+
+        return $validations;
     }
 }
