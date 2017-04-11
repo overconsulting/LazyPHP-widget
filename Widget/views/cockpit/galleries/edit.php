@@ -19,7 +19,7 @@
     <div class="box-header">
         <h3>Medias de la gallerie</h3>
         <div class="box-tools pull-right">
-            {% button url="cockpit_widget_galleriesmedias_new_$gallery.id$" type="success" icon="plus" content="" class="btn-xs" %}
+            {% button type="success" icon="picture-o" content="" size="lg" class="selectMedias" %}
         </div>
     </div>
     <div class="box-body">
