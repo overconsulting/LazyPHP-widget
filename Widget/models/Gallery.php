@@ -31,14 +31,4 @@ class Gallery extends Widget
             )
         );
     }
-
-    public function render()
-    {
-        $html =
-            '<div id="gallery_"'.$this->id.' class="widget widget-gallery">'.
-                'Gallerie "'.$this->title.'" ('.$this->id.')'.
-            '</div>';
-
-        return $html;
-    }
 }

@@ -10,7 +10,7 @@
         {% form_open id="formGallery" action="formAction" class="form-horizontal" %}
             {% input_text name="title" model="gallery.title" label="Titre" %}
             {% input_textarea name="description" model="gallery.description" label="Description" %}
-            {% input_media name="media" label="Media" data-xxx="zaaz" %}
+            {% input_media name="media" label="Media" %}
             {% input_submit name="submit" value="save" formId="formGallery" class="btn-primary" icon="save" label="Enregistrer" %}
         {% form_close %}
     </div>
