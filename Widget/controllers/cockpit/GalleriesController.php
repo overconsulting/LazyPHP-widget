@@ -4,6 +4,7 @@ namespace Widget\controllers\cockpit;
 
 use app\controllers\cockpit\CockpitController;
 use System\Router;
+use System\Session;
 
 use Widget\models\Gallery;
 use Widget\models\GalleryMedia;
