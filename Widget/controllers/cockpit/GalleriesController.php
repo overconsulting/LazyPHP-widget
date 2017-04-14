@@ -32,9 +32,12 @@ class GalleriesController extends CockpitController
             $this->gallery = new Gallery();
         }
 
+        $galleriesmedias = array();
+
         $this->render('edit', array(
             'id' => 0,
             'gallery' => $this->gallery,
+            'galleriesmedias' => $galleriesmedias,
             'pageTitle' => 'Nouvelle gallerie',
             'formAction' => Router::url('cockpit_widget_galleries_create')
         ));

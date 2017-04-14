@@ -10,7 +10,7 @@
         {% form_open id="formGallery" action="formAction" class="form-horizontal" %}
             {% input_text name="title" model="gallery.title" label="Titre" %}
             {% input_textarea name="description" model="gallery.description" label="Description" %}
-            {% input_media name="media" label="Media" %}
+            {% input_media name="media" label="Media" multiple="1" %}
             {% input_submit name="submit" value="save" formId="formGallery" class="btn-primary" icon="save" label="Enregistrer" %}
         {% form_close %}
     </div>
@@ -20,7 +20,7 @@
     <div class="box-header">
         <h3>Medias de la gallerie</h3>
         <div class="box-tools pull-right">
-            {% button type="success" icon="picture-o" content="" size="lg" class="selectMedias" %}
+            {% button type="success" icon="picture-o" content="Ajouter des medias..." size="lg" class="selectMedias" %}
         </div>
     </div>
     <div class="box-body">
