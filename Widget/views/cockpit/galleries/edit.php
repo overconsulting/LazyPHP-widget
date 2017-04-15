@@ -20,7 +20,8 @@
     <div class="box-header">
         <h3>Medias de la gallerie</h3>
         <div class="box-tools pull-right">
-            {% button type="success" icon="picture-o" content="Ajouter des medias..." size="lg" class="selectMedias" %}
+            {% button type="success" icon="picture-o" content="Ajouter des medias..." size="lg" class="input-media-button" data-input-id="added_medias" data-select-multiple="1" %}
+            {% input_hidden id="added_medias" name="added_medias" value="" %}
         </div>
     </div>
     <div class="box-body">

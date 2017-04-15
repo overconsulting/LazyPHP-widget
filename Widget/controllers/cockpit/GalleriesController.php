@@ -113,4 +113,10 @@ class GalleriesController extends CockpitController
         Session::addFlash('Gallerie supprimée', 'success');
         $this->redirect('cockpit_widget_galleries');
     }
+
+    public function addmediasAction($id)
+    {
+        $gallery = Gallery::findById($id);
+        $medias = $this->request->post['medias'];
+    }
 }
