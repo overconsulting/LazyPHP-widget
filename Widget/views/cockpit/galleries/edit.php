@@ -24,7 +24,7 @@
         </div>
     </div>
     <div class="box-body">
-        <table class="table table-hover">
+        <table id="gallery_medias" class="table table-hover">
             <thead>
                 <tr>
                     <th width="1%">ID</th>
@@ -38,7 +38,7 @@
             </thead>
             <tbody>
 <?php
-foreach ($params['galleriesmedias'] as $galleryMedia) {
+foreach ($params['gallery']->galleriesmedias as $galleryMedia) {
     if ($galleryMedia->active == 1) {
         $active = '<i class="fa fa-check"></i>';
     } else {
@@ -50,13 +50,14 @@ foreach ($params['galleriesmedias'] as $galleryMedia) {
     echo
         '<tr>'.
             '<td>'.$galleryMedia->id.'</td>'.
+            '<td>'.$galleryMedia->media->getHtml().'</td>'.
             '<td>'.$galleryMedia->title.'</td>'.
             '<td>'.$galleryMedia->description.'</td>'.
             '<td>'.$position.'</td>'.
             '<td>'.$active.'</td>'.
             '<td>';?>
-                {% button url="cockpit_widget_galleries_edit_<?php echo $galleryMedia->id ?>" type="primary" size="xs" icon="pencil" content="" %}
-                {% button url="cockpit_widget_galleries_delete_<?php echo $galleryMedia->id ?>" type="danger" size="xs" icon="trash-o" confirmation="Vous confirmer vouloir supprimer ce media?" %}
+                {% button url="cockpit_widget_galleriesmedias_edit_$gallery.id$_<?php echo $galleryMedia->id ?>" type="primary" size="xs" icon="pencil" content="" %}
+                {% button url="cockpit_widget_galleriesmedias_delete_$gallery.id$_<?php echo $galleryMedia->id ?>" type="danger" size="xs" icon="trash-o" confirmation="Vous confirmer vouloir supprimer ce media?" %}
 <?php
 echo
         '</td>'.

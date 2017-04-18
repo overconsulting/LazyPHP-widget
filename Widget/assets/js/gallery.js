@@ -1,5 +1,6 @@
 function mediaAdded()
 {
-    alert(selectedMedias);
+	var submitButton = document.getElementById("submit");
+	submitButton.click();
     return true;
 }

@@ -35,7 +35,7 @@ class GalleryMedia extends Widget
             ),
             'media' => array(
                 'type' => '1',
-                'model' => 'Catalog\\models\\Media',
+                'model' => 'Media\\models\\Media',
                 'key' => 'media_id'
             )
         );
