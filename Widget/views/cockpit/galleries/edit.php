@@ -1,10 +1,11 @@
 <h1 class="page-title">{{ pageTitle }}</h1>
-<div class="actions">
-    {% button url="cockpit_widget_galleries" type="default" icon="arrow-left" content="Retour" %}
-</div>
-<div class="box box-success">
+
+<div class="box box-ciel">
     <div class="box-header">
-        <h3>Infos gallerie</h3>
+        <h3 class="box-title">{{ titleBox }}</h3>
+        <div class="box-tools pull-right">
+            {% button url="cockpit_widget_galleries" type="default" size="xs" icon="arrow-left" content="" %}
+        </div>
     </div>
     <div class="box-body">
         {% form_open id="formGallery" action="formAction" class="form-horizontal" %}
@@ -16,11 +17,11 @@
     </div>
 </div>
 
-<div class="box box-success">
+<div class="box box-ciel">
     <div class="box-header">
-        <h3>Medias de la gallerie</h3>
+        <h3 class="box-title">Medias de la gallerie</h3>
         <div class="box-tools pull-right">
-            {% button type="success" icon="picture-o" content="Ajouter des medias..." size="lg" class="input-media-button" data-input-id="added_medias" data-select-multiple="1" data-media-type="image" data-on-valid="mediaAdded" %}
+            {% button type="success" icon="picture-o" content="" size="xs" class="input-media-button" data-input-id="added_medias" data-select-multiple="1" data-media-type="image" data-on-valid="mediaAdded" %}
         </div>
     </div>
     <div class="box-body">

@@ -22,7 +22,8 @@ class GalleriesController extends CockpitController
 
         $this->render('index', array(
             'galleries' => $galleries,
-            'pageTitle' => 'Galleries'
+            'titleBox'  => 'Liste des galleries',
+            'titlePage' => '<i class="fa fa-picture-o fa-ciel"></i> Gestion des Galleries'
         ));
     }
 
@@ -35,7 +36,8 @@ class GalleriesController extends CockpitController
         $this->render('edit', array(
             'id' => 0,
             'gallery' => $this->gallery,
-            'pageTitle' => 'Nouvelle gallerie',
+            'titleBox' => 'Nouvelle gallerie',
+            'titlePage' => '<i class="fa fa-picture-o fa-ciel"></i> Gestion des Galleries',
             'formAction' => Router::url('cockpit_widget_galleries_create')
         ));
     }
@@ -49,7 +51,8 @@ class GalleriesController extends CockpitController
         $this->render('edit', array(
             'id' => $id,
             'gallery' => $this->gallery,
-            'pageTitle' => 'Modification gallerie n°'.$id,
+            'titleBox' => 'Modification gallerie n°'.$id,
+            'titlePage' => '<i class="fa fa-picture-o fa-ciel"></i> Gestion des Galleries',
             'formAction' => Router::url('cockpit_widget_galleries_update_'.$id)
         ));
     }
