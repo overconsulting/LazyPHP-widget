@@ -13,11 +13,11 @@ class Widget
 
         switch ($type) {
             case 'gallery':
-                self::getWidgetGallery($id);
+                $html = self::getWidgetGallery($id);
                 break;
 
             case 'slider':
-                self::getWidgetSlider($id);
+                $html = self::getWidgetSlider($id);
                 break;
 
             case 'default':
@@ -38,7 +38,7 @@ class Widget
         
         $gallery = Gallery::findById($id);
         $html = $gallery->render('gallery');
-var_dump($gallery);
+// var_dump($html);
         return $html;
     }
 

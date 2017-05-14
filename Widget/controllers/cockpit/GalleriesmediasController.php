@@ -27,11 +27,12 @@ class GalleriesmediasController extends CockpitController
         }
 
         $this->render('edit', array(
-            'id' => 0,
-            'galleryMedia' => $this->galleryMedia,
-            'galleryId' => $galleryId,
-            'pageTitle' => 'Ajout media à la gallerie',
-            'formAction' => Router::url('cockpit_widget_galleriesmedias_create_'.$galleryId)
+            'id'            => 0,
+            'galleryMedia'  => $this->galleryMedia,
+            'galleryId'     => $galleryId,
+            'titleBox'      => 'Ajout media à la gallerie',
+            'pageTitle'     => 'Gestion Widget Gallerie',
+            'formAction'    => Router::url('cockpit_widget_galleriesmedias_create_'.$galleryId)
         ));
     }
 
@@ -46,7 +47,8 @@ class GalleriesmediasController extends CockpitController
             'id' => $id,
             'galleryMedia' => $this->galleryMedia,
             'galleryId' => $galleryId,
-            'pageTitle' => 'Modification media de la gallerie n°'.$galleryId,
+            'titleBox'      => 'Modification media de la gallerie n°'.$galleryId,
+            'pageTitle'     => 'Gestion Widget Gallerie',
             'formAction' => Router::url('cockpit_widget_galleriesmedias_update_'.$galleryId.'_'.$id)
         ));
     }

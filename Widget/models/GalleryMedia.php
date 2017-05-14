@@ -12,7 +12,8 @@ class GalleryMedia extends Widget
         'title',
         'description',
         'position',
-        'active'
+        'active',
+        'url'
     );
 
     public static function getTableName()

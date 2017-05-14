@@ -29,11 +29,12 @@
             <thead>
                 <tr>
                     <th width="1%">ID</th>
-                    <th>Media</th>
+                    <th width="2%">Media</th>
                     <th>Titre</th>
                     <th>Description</th>
-                    <th>Position</th>
-                    <th>Active</th>
+                    <th>Lien</th>
+                    <th width="2%">Position</th>
+                    <th width="2%">Active</th>
                     <th width="10%">Actions</th>
                 </tr>
             </thead>
@@ -54,10 +55,11 @@ foreach ($params['gallery']->galleriesmedias as $galleryMedia) {
             '<td>'.$galleryMedia->media->getHtml().'</td>'.
             '<td>'.$galleryMedia->title.'</td>'.
             '<td>'.$galleryMedia->description.'</td>'.
+            '<td>'.$galleryMedia->url.'</td>'.
             '<td>'.$position.'</td>'.
             '<td>'.$active.'</td>'.
             '<td>';?>
-                {% button url="cockpit_widget_galleriesmedias_edit_$gallery.id$_<?php echo $galleryMedia->id ?>" type="primary" size="xs" icon="pencil" content="" %}
+                {% button url="cockpit_widget_galleriesmedias_edit_$gallery.id$_<?php echo $galleryMedia->id ?>" type="info" size="xs" icon="pencil" content="" %}
                 {% button url="cockpit_widget_galleriesmedias_delete_$gallery.id$_<?php echo $galleryMedia->id ?>" type="danger" size="xs" icon="trash-o" confirmation="Vous confirmer vouloir supprimer ce media?" %}
 <?php
 echo
