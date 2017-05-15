@@ -2,7 +2,7 @@
 
 namespace Widget\widgets;
 
-use Widget\Widget;
+use Widget\widgets\Widget;
 use Widget\models\Gallery;
 
 class GalleryWidget extends Widget
@@ -19,7 +19,7 @@ class GalleryWidget extends Widget
 		$id = 0;
 		if (!is_array($this->params)) {
 			$id = (int)$params;
-		} else id (isset($params['id'])) {
+		} else if (isset($params['id'])) {
 			$id = (int)$params['id'];
 		}
 

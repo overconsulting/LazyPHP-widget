@@ -2,7 +2,7 @@
 
 namespace Widget\widgets;
 
-use Widget\Widget;
+use Widget\widgets\Widget;
 use Widget\models\Slider;
 
 class SliderWidget extends Widget
