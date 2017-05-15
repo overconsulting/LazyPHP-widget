@@ -7,10 +7,8 @@ use Widget\models\Slider;
 
 class SliderWidget extends Widget
 {
-	public function __construct($params)
+	public function __construct($params = array())
 	{
 		$this->type = 'slider';
 	}
 }
-
-Widget::$classes['slider'] = 'Widget\widgets\SliderWidget';

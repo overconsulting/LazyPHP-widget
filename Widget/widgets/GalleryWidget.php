@@ -7,7 +7,7 @@ use Widget\models\Gallery;
 
 class GalleryWidget extends Widget
 {
-	public function __construct($params)
+	public function __construct($params = array())
 	{
 		$this->type = 'gallery';
 	}
@@ -34,5 +34,3 @@ class GalleryWidget extends Widget
 		return $html;
 	}
 }
-
-Widget::$classes['gallery'] = 'Widget\widgets\GalleryWidget';
