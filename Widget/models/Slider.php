@@ -2,9 +2,9 @@
 
 namespace Widget\models;
 
-use Widget\models\Widget;
+use System\Model;
 
-class Slider extends Widget
+class Slider extends Model
 {
     protected $permittedColumns = array(
         'title',

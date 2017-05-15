@@ -13,7 +13,8 @@
         "psr-0": {
             "Widget": "/",
             "Widget\\controllers": "/controllers/",
-            "Widget\\models": "/models/"
+            "Widget\\models": "/models/",
+            "Widget\\widgets": "/widgets/"
         }
     }
 }

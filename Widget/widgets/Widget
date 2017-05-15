@@ -1,0 +1,52 @@
+<?php
+
+namespace Widget\widgets;
+
+class Widget
+{
+    public static $classes = array(
+        'gallery' => 'Widget\widgets\GalleryWidget',
+        'slider' => 'Widget\widgets\SliderWidget'
+    );
+
+    public $type = '';
+
+    public $params = array();
+
+    public function __construct($params)
+    {
+        $this->params = $params;
+    }
+
+    public function getViewFile()
+    {
+        $viewFile = APP_DIR.DS.'widgets'.DS.'views'.DS.$this->type.'_widget.php';
+        if file_exists($viewFile) {
+            return $viewFile;
+        }
+
+        $viewFile = dirname(__FILE__).DS.'views'.DS.$this->type.'_widget.php';
+        if file_exists($viewFile) {
+            return $viewFile;
+        }
+    }
+
+    public function getHtml()
+    {
+        return '<div class="widget widget-'.$this->type.'"></div>';
+    }
+
+    public static function getWidget($type, $params)
+    {
+        $class = self::$classes[$type];
+        $widget = new $class($params);
+        return $widget;
+    }
+
+    public static function getWidgetHtml($type, $params)
+    {
+        $class = self::getWidget($type, $params);
+        $widget = new $class($params);
+        return $widget->getHmtl();
+    }
+}

@@ -2,9 +2,9 @@
 
 namespace Widget\models;
 
-use Widget\models\Widget;
+use System\Model;
 
-class Gallery extends Widget
+class Gallery extends Model
 {
     protected $permittedColumns = array(
         'title',
