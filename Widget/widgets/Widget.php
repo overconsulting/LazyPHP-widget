@@ -52,7 +52,7 @@ class Widget
     {
         $class = self::getWidget($type, $params);
         $widget = new $class($params);
-        return $widget->getHmtl();
+        return $widget->getHtml();
     }
 }
 
