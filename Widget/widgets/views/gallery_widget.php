@@ -1,4 +1,4 @@
-<div id="gallery_"<?php echo $gallery->id ?>" class="widget widget-gallery row">
+<div id="gallery_widget_<?php echo $gallery->id; ?>" class="widget widget-gallery row">
 	<?php foreach ($gallery->galleriesmedias as $gallerymedia) : ?>
 		<a href="<?php echo $gallerymedia->url; ?>" title="<?php echo $gallerymedia->title; ?>">
 			<div class="col-lg-3 media">

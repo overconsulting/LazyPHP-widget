@@ -11,6 +11,7 @@ class GalleryWidget extends Widget
     public function __construct($params = array())
     {
         $this->type = 'gallery';
+        parent::__construct($params);
     }
 
     public function getHtml()
@@ -36,5 +37,10 @@ class GalleryWidget extends Widget
         }
 
         return $html;
+    }
+
+    public static function getDbModel()
+    {
+        return 'Widget\models\Gallery';
     }
 }
