@@ -2,7 +2,7 @@
 
 namespace Widget\models;
 
-use System\Model;
+use Core\Model;
 
 class Widget extends Model
 {
