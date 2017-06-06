@@ -3,8 +3,8 @@
 namespace Widget\controllers\cockpit;
 
 use app\controllers\cockpit\CockpitController;
-use System\Router;
-use System\Session;
+use Core\Router;
+use Core\Session;
 
 use Widget\models\GalleryMedia;
 use Widget\models\Gallery;

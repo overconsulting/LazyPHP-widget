@@ -4,7 +4,7 @@ namespace Widget\widgets;
 
 use Widget\widgets\Widget;
 use Widget\models\Gallery;
-use System\Templator;
+use Core\Templator;
 
 class GalleryWidget extends Widget
 {
