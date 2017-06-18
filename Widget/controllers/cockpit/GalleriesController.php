@@ -20,7 +20,7 @@ class GalleriesController extends CockpitController
     {
         $galleries = Gallery::findAll();
 
-        $this->render('index', array(
+        $this->render('widget::galleries::index', array(
             'galleries' => $galleries,
             'titleBox'  => 'Liste des galleries',
             'titlePage' => '<i class="fa fa-picture-o fa-ciel"></i> Gestion des Galleries'
