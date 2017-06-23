@@ -26,7 +26,7 @@ class GalleriesmediasController extends CockpitController
             $this->galleryMedia->gallery_id = $galleryId;
         }
 
-        $this->render('edit', array(
+        $this->render('widget::galleriesmedias::edit', array(
             'id'            => 0,
             'galleryMedia'  => $this->galleryMedia,
             'galleryId'     => $galleryId,
@@ -43,7 +43,7 @@ class GalleriesmediasController extends CockpitController
             $this->galleryMedia = GalleryMedia::findById($id);
         }
 
-        $this->render('edit', array(
+        $this->render('widget::galleriesmedias::edit', array(
             'id' => $id,
             'galleryMedia' => $this->galleryMedia,
             'galleryId' => $galleryId,

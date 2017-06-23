@@ -33,7 +33,7 @@ class GalleriesController extends CockpitController
             $this->gallery = new Gallery();
         }
 
-        $this->render('edit', array(
+        $this->render('widget::galleries::edit', array(
             'id' => 0,
             'gallery' => $this->gallery,
             'titleBox' => 'Nouvelle gallerie',
@@ -48,7 +48,7 @@ class GalleriesController extends CockpitController
             $this->gallery = Gallery::findById($id);
         }
 
-        $this->render('edit', array(
+        $this->render('widget::galleries::edit', array(
             'id' => $id,
             'gallery' => $this->gallery,
             'titleBox' => 'Modification gallerie n°'.$id,
