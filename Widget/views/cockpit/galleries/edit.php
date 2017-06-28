@@ -21,7 +21,7 @@
     <div class="box-header">
         <h3 class="box-title">Medias de la gallerie</h3>
         <div class="box-tools pull-right">
-            {% button type="success" icon="picture-o" content="" size="xs" class="input-media-button" data-input-id="added_medias" data-select-multiple="1" data-media-type="image" data-on-valid="mediaAdded" %}
+            {% button type="success" icon="picture-o" content="" size="xs" class="input-media-button" data-input-id="added_medias" data-select-multiple="1" data-media-type="image" data-on-valid="mediasAdded" %}
         </div>
     </div>
     <div class="box-body">
