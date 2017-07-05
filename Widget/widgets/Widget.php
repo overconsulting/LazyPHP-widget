@@ -22,7 +22,7 @@ class Widget
             return $viewFile;
         }
 
-        $viewFile = dirname(__FILE__).DS.'views'.DS.$thisis->type.'_widget.php';
+        $viewFile = dirname(__FILE__).DS.'views'.DS.$this->type.'_widget.php';
         if (file_exists($viewFile)) {
             return $viewFile;
         }
