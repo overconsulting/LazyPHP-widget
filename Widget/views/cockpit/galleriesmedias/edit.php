@@ -3,12 +3,12 @@
     <div class="box-header">
         <h3 class="box-title">{{ titleBox }}</h3>
         <div class="box-tools pull-right">
-    		{% button url="cockpit_widget_galleries_edit_$galleryId$" type="default" icon="arrow-left" size="sm" content="" %}
+    		{% button url="cockpit_widget_galleries_edit_$galleryId$" type="secondary" icon="arrow-left" size="sm" content="" %}
 		</div>
 	</div>
 
 	<div class="box-body">
-		{% form_open id="formGalleryMedia" action="formAction" class="form-horizontal" %}
+		{% form_open id="formGalleryMedia" action="formAction" %}
 			{% input_media name="media_id" model="galleryMedia.media_id" label="media" mediaType="image" %}
 			{% input_text name="title" model="galleryMedia.title" label="Titre" %}
 			{% input_textarea name="description" model="galleryMedia.description" label="Description" %}

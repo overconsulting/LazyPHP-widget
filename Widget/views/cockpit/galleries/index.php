@@ -25,8 +25,8 @@ foreach ($params['galleries'] as $gallery) {
             '<td>'.$gallery->title.'</td>'.
             '<td>'.$gallery->description.'</td>'.
             '<td>';?>
-                {% button url="cockpit_widget_galleries_edit_<?php echo $gallery->id ?>" type="info" size="xs" icon="pencil" content="" %}
-                {% button url="cockpit_widget_galleries_delete_<?php echo $gallery->id ?>" type="danger" size="xs" icon="trash-o" confirmation="Vous confirmer vouloir supprimer cette gallerie?" %}
+                {% button url="cockpit_widget_galleries_edit_<?php echo $gallery->id ?>" type="info" size="sm" icon="pencil" content="" %}
+                {% button url="cockpit_widget_galleries_delete_<?php echo $gallery->id ?>" type="danger" size="sm" icon="trash-o" confirmation="Vous confirmer vouloir supprimer cette gallerie?" %}
 <?php
 echo
         '</td>'.

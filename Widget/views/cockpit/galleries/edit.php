@@ -4,11 +4,11 @@
     <div class="box-header">
         <h3 class="box-title">{{ titleBox }}</h3>
         <div class="box-tools pull-right">
-            {% button url="cockpit_widget_galleries" type="default" size="xs" icon="arrow-left" content="" %}
+            {% button url="cockpit_widget_galleries" type="secondary" size="sm" icon="arrow-left" content="" %}
         </div>
     </div>
     <div class="box-body">
-        {% form_open id="formGallery" action="formAction" class="form-horizontal" %}
+        {% form_open id="formGallery" action="formAction" %}
             {% input_text name="title" model="gallery.title" label="Titre" %}
             {% input_textarea name="description" model="gallery.description" label="Description" %}
             {% input_hidden id="added_medias" name="added_medias" value="" %}
@@ -21,7 +21,7 @@
     <div class="box-header">
         <h3 class="box-title">Medias de la gallerie</h3>
         <div class="box-tools pull-right">
-            {% button type="success" icon="picture-o" content="" size="xs" class="input-media-button" data-input-id="added_medias" data-select-multiple="1" data-media-type="image" data-on-valid="mediasAdded" %}
+            {% button type="success" icon="picture-o" content="" size="sm" class="input-media-button" data-input-id="added_medias" data-select-multiple="1" data-media-type="image" data-on-valid="mediasAdded" %}
         </div>
     </div>
     <div class="box-body">
@@ -47,7 +47,7 @@ foreach ($params['gallery']->galleriesmedias as $galleryMedia) {
         $active = '<i class="fa fa-times"></i>';
     }
 
-    $position = '{% button id="gallerymedia_"'.$galleryMedia->id.'_down" class="btn-position-down" size="xs" icon="caret-up" %}{% button id="gallerymedia_"'.$galleryMedia->id.'_up" class="btn-postion-up" size="xs" icon="caret-down" %}';
+    $position = '{% button id="gallerymedia_"'.$galleryMedia->id.'_down" class="btn-position-down" size="sm" icon="caret-up" %}{% button id="gallerymedia_"'.$galleryMedia->id.'_up" class="btn-postion-up" size="sm" icon="caret-down" %}';
 
     echo
         '<tr>'.
@@ -59,8 +59,8 @@ foreach ($params['gallery']->galleriesmedias as $galleryMedia) {
             '<td>'.$position.'</td>'.
             '<td>'.$active.'</td>'.
             '<td>';?>
-                {% button url="cockpit_widget_galleriesmedias_edit_$gallery.id$_<?php echo $galleryMedia->id ?>" type="info" size="xs" icon="pencil" content="" %}
-                {% button url="cockpit_widget_galleriesmedias_delete_$gallery.id$_<?php echo $galleryMedia->id ?>" type="danger" size="xs" icon="trash-o" confirmation="Vous confirmer vouloir supprimer ce media?" %}
+                {% button url="cockpit_widget_galleriesmedias_edit_$gallery.id$_<?php echo $galleryMedia->id ?>" type="info" size="sm" icon="pencil" content="" %}
+                {% button url="cockpit_widget_galleriesmedias_delete_$gallery.id$_<?php echo $galleryMedia->id ?>" type="danger" size="sm" icon="trash-o" confirmation="Vous confirmer vouloir supprimer ce media?" %}
 <?php
 echo
         '</td>'.
