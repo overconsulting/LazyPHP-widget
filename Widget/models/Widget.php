@@ -10,7 +10,9 @@ class Widget extends Model
         'label',
         'type',
         'app_widget',
-        'params'
+        'params',
+        'link',
+        'administrable'
     );
 
     public function setDefaultProperties()
@@ -18,5 +20,5 @@ class Widget extends Model
     	parent::setDefaultProperties();
 
     	$this->app_widget = 0;
-	}    
+	}
 }
