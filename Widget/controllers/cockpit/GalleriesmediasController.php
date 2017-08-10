@@ -59,10 +59,10 @@ class GalleriesmediasController extends CockpitController
         $this->galleryMedia->gallery_id = $galleryId;
 
         if ($this->galleryMedia->save($this->request->post)) {
-            Session::addFlash('Media ajouté dans la gallerie', 'success');
+            $this->addFlash('Media ajouté dans la gallerie', 'success');
             $this->redirect('cockpit_widget_galleries_edit_'.$galleryId);
         } else {
-            Session::addFlash('Erreur(s) dans le formulaire', 'danger');
+            $this->addFlash('Erreur(s) dans le formulaire', 'danger');
         }
 
         $this->newAction($galleryId);
@@ -73,10 +73,10 @@ class GalleriesmediasController extends CockpitController
         $this->galleryMedia = GalleryMedia::findById($id);
         
         if ($this->galleryMedia->save($this->request->post)) {
-            Session::addFlash('Media de la gallerie modifié', 'success');
+            $this->addFlash('Media de la gallerie modifié', 'success');
             $this->redirect('cockpit_widget_galleries_edit_'.$galleryId);
         } else {
-            Session::addFlash('Erreur(s) dans le formulaire', 'danger');
+            $this->addFlash('Erreur(s) dans le formulaire', 'danger');
         }
 
         $this->editAction($galleryId, $id);
@@ -86,7 +86,7 @@ class GalleriesmediasController extends CockpitController
     {
         $gallerymedia = GalleryMedia::findById($id);
         $gallerymedia->delete();
-        Session::addFlash('Media supprimé de la gallerie', 'success');
+        $this->addFlash('Media supprimé de la gallerie', 'success');
         $this->redirect('cockpit_widget_galleries_edit_'.$galleryId);
     }
 }

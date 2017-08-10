@@ -65,9 +65,9 @@ class GalleriesController extends CockpitController
 
         if ($this->gallery->save($this->request->post)) {
             $this->addMedias($addedMedias);
-            Session::addFlash('Gallerie ajoutée', 'success');
+            $this->addFlash('Gallerie ajoutée', 'success');
         } else {
-            Session::addFlash('Erreur(s) dans le formulaire', 'danger');
+            $this->addFlash('Erreur(s) dans le formulaire', 'danger');
         }
 
         $this->newAction();
@@ -81,10 +81,10 @@ class GalleriesController extends CockpitController
 
         if ($this->gallery->save($this->request->post)) {
             $this->addMedias($addedMedias);
-            Session::addFlash('Gallerie modifiée', 'success');
+            $this->addFlash('Gallerie modifiée', 'success');
             $this->redirect('cockpit_widget_galleries_edit_'.$this->gallery->id);
         } else {
-            Session::addFlash('Erreur(s) dans le formulaire', 'danger');
+            $this->addFlash('Erreur(s) dans le formulaire', 'danger');
         }
 
         $this->editAction($id);
@@ -94,7 +94,7 @@ class GalleriesController extends CockpitController
     {
         $gallery = Gallery::findById($id);
         $gallery->delete();
-        Session::addFlash('Gallerie supprimée', 'success');
+        $this->addFlash('Gallerie supprimée', 'success');
         $this->redirect('cockpit_widget_galleries');
     }
 
