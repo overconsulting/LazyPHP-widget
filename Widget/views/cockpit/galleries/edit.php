@@ -2,7 +2,7 @@
 
 <div class="box box-ciel">
     <div class="box-header">
-        <h3 class="box-title">{{ titleBox }}</h3>
+        <h3 class="box-title">{{ boxTitle }}</h3>
         <div class="box-tools pull-right">
             {% button url="cockpit_widget_galleries" type="secondary" size="sm" icon="arrow-left" content="" %}
         </div>
@@ -40,32 +40,38 @@
             </thead>
             <tbody>
 <?php
-foreach ($params['gallery']->galleriesmedias as $galleryMedia) {
-    if ($galleryMedia->active == 1) {
-        $active = '<i class="fa fa-check"></i>';
-    } else {
-        $active = '<i class="fa fa-times"></i>';
+if ((int)$gallery->id != 0) {
+    $galleriesmedias = $params['gallery']->galleriesmedias;
+    if ($galleriesmedias !== null && count($galleriesmedias) > 0) {
+        foreach ($params['gallery']->galleriesmedias as $galleryMedia) {
+            if ($galleryMedia->active == 1) {
+                $active = '<i class="fa fa-check"></i>';
+            } else {
+                $active = '<i class="fa fa-times"></i>';
+            }
+
+            $position = '{% button id="gallerymedia_"'.$galleryMedia->id.'_down" class="btn-position-down" size="sm" icon="caret-up" %}{% button id="gallerymedia_"'.$galleryMedia->id.'_up" class="btn-postion-up" size="sm" icon="caret-down" %}';
+
+            echo
+                '<tr>'.
+                    '<td>'.$galleryMedia->id.'</td>'.
+                    '<td>'.$galleryMedia->media->getHtml().'</td>'.
+                    '<td>'.$galleryMedia->title.'</td>'.
+                    '<td>'.$galleryMedia->description.'</td>'.
+                    '<td>'.$galleryMedia->url.'</td>'.
+                    '<td>'.$position.'</td>'.
+                    '<td>'.$active.'</td>'.
+                    '<td>';?>
+                        {% button url="cockpit_widget_galleriesmedias_edit_$gallery.id$_<?php echo $galleryMedia->id ?>" type="info" size="sm" icon="pencil" content="" %}
+                        {% button url="cockpit_widget_galleriesmedias_delete_$gallery.id$_<?php echo $galleryMedia->id ?>" type="danger" size="sm" icon="trash-o" confirmation="Vous confirmer vouloir supprimer ce media?" %}
+        <?php
+        echo
+                '</td>'.
+            '</tr>';
+        }
     }
-
-    $position = '{% button id="gallerymedia_"'.$galleryMedia->id.'_down" class="btn-position-down" size="sm" icon="caret-up" %}{% button id="gallerymedia_"'.$galleryMedia->id.'_up" class="btn-postion-up" size="sm" icon="caret-down" %}';
-
-    echo
-        '<tr>'.
-            '<td>'.$galleryMedia->id.'</td>'.
-            '<td>'.$galleryMedia->media->getHtml().'</td>'.
-            '<td>'.$galleryMedia->title.'</td>'.
-            '<td>'.$galleryMedia->description.'</td>'.
-            '<td>'.$galleryMedia->url.'</td>'.
-            '<td>'.$position.'</td>'.
-            '<td>'.$active.'</td>'.
-            '<td>';?>
-                {% button url="cockpit_widget_galleriesmedias_edit_$gallery.id$_<?php echo $galleryMedia->id ?>" type="info" size="sm" icon="pencil" content="" %}
-                {% button url="cockpit_widget_galleriesmedias_delete_$gallery.id$_<?php echo $galleryMedia->id ?>" type="danger" size="sm" icon="trash-o" confirmation="Vous confirmer vouloir supprimer ce media?" %}
-<?php
-echo
-        '</td>'.
-    '</tr>';
 }
+
 ?>
             </tbody>
         </table>

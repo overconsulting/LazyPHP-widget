@@ -11,6 +11,11 @@ use Widget\models\GalleryMedia;
 
 class GalleriesController extends CockpitController
 {
+    /**
+     * @var string
+     */
+    private $pageTitle = '<i class="fa fa-picture-o fa-ciel"></i> Gestion des Galleries';
+
     /*
      * @var Widget\models\Gallery
      */
@@ -22,8 +27,8 @@ class GalleriesController extends CockpitController
 
         $this->render('widget::galleries::index', array(
             'galleries' => $galleries,
-            'titleBox'  => 'Liste des galleries',
-            'titlePage' => '<i class="fa fa-picture-o fa-ciel"></i> Gestion des Galleries'
+            'pageTitle' => $this->pageTitle,
+            'boxTitle'  => 'Liste des galleries'
         ));
     }
 
@@ -36,8 +41,8 @@ class GalleriesController extends CockpitController
         $this->render('widget::galleries::edit', array(
             'id' => 0,
             'gallery' => $this->gallery,
-            'titleBox' => 'Nouvelle gallerie',
-            'titlePage' => '<i class="fa fa-picture-o fa-ciel"></i> Gestion des Galleries',
+            'pageTitle' => $this->pageTitle,
+            'boxTitle' => 'Nouvelle gallerie',
             'formAction' => Router::url('cockpit_widget_galleries_create')
         ));
     }
@@ -51,8 +56,8 @@ class GalleriesController extends CockpitController
         $this->render('widget::galleries::edit', array(
             'id' => $id,
             'gallery' => $this->gallery,
-            'titleBox' => 'Modification gallerie n°'.$id,
-            'titlePage' => '<i class="fa fa-picture-o fa-ciel"></i> Gestion des Galleries',
+            'pageTitle' => $this->pageTitle,
+            'boxTitle' => 'Modification gallerie n°'.$id,
             'formAction' => Router::url('cockpit_widget_galleries_update_'.$id)
         ));
     }
