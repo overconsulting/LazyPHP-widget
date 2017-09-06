@@ -4,7 +4,6 @@ namespace Widget\controllers\cockpit;
 
 use app\controllers\cockpit\CockpitController;
 use Core\Router;
-use Core\Session;
 
 use Widget\models\Gallery;
 use Widget\models\GalleryMedia;
@@ -14,7 +13,7 @@ class GalleriesController extends CockpitController
     /**
      * @var string
      */
-    private $pageTitle = '<i class="fa fa-picture-o fa-ciel"></i> Gestion des Galleries';
+    private $pageTitle = '<i class="fa fa-picture-o fa-ciel"></i> Gestion des galleries';
 
     /*
      * @var Widget\models\Gallery
@@ -25,11 +24,14 @@ class GalleriesController extends CockpitController
     {
         $galleries = Gallery::findAll();
 
-        $this->render('widget::galleries::index', array(
-            'galleries' => $galleries,
-            'pageTitle' => $this->pageTitle,
-            'boxTitle'  => 'Liste des galleries'
-        ));
+        $this->render(
+            'widget::galleries::index',
+            array(
+                'galleries' => $galleries,
+                'pageTitle' => $this->pageTitle,
+                'boxTitle'  => 'Liste des galleries'
+            )
+        );
     }
 
     public function newAction()
@@ -38,13 +40,16 @@ class GalleriesController extends CockpitController
             $this->gallery = new Gallery();
         }
 
-        $this->render('widget::galleries::edit', array(
-            'id' => 0,
-            'gallery' => $this->gallery,
-            'pageTitle' => $this->pageTitle,
-            'boxTitle' => 'Nouvelle gallerie',
-            'formAction' => Router::url('cockpit_widget_galleries_create')
-        ));
+        $this->render(
+            'widget::galleries::edit',
+            array(
+                'id' => 0,
+                'gallery' => $this->gallery,
+                'pageTitle' => $this->pageTitle,
+                'boxTitle' => 'Nouvelle gallerie',
+                'formAction' => Router::url('cockpit_widget_galleries_create')
+            )
+        );
     }
 
     public function editAction($id)
@@ -53,25 +58,31 @@ class GalleriesController extends CockpitController
             $this->gallery = Gallery::findById($id);
         }
 
-        $this->render('widget::galleries::edit', array(
-            'id' => $id,
-            'gallery' => $this->gallery,
-            'pageTitle' => $this->pageTitle,
-            'boxTitle' => 'Modification gallerie n°'.$id,
-            'formAction' => Router::url('cockpit_widget_galleries_update_'.$id)
-        ));
+        $this->render(
+            'widget::galleries::edit',
+            array(
+                'id' => $id,
+                'gallery' => $this->gallery,
+                'pageTitle' => $this->pageTitle,
+                'boxTitle' => 'Modification gallerie',
+                'formAction' => Router::url('cockpit_widget_galleries_update_'.$id)
+            )
+        );
     }
 
     public function createAction()
     {
         $this->gallery = new Gallery();
 
-        $addedMedias = $this->request->post['added_medias'] != '' ? explode(',', $this->request->post['added_medias']) : array();
+        // $addedMedias = $this->request->post['added_medias'] != '' ? explode(',', $this->request->post['added_medias']) : array();
 
         if ($this->gallery->save($this->request->post)) {
-            $this->addMedias($addedMedias);
+            // $this->addMedias($addedMedias);
             $this->addFlash('Gallerie ajoutée', 'success');
+            $this->addFlash('Vous pouvez maintenant ajouter des medias à la gallerie', 'info');
+            $this->redirect('cockpit_widget_galleries_edit_'.$this->gallery->id);
         } else {
+
             $this->addFlash('Erreur(s) dans le formulaire', 'danger');
         }
 
@@ -98,6 +109,10 @@ class GalleriesController extends CockpitController
     public function deleteAction($id)
     {
         $gallery = Gallery::findById($id);
+        $galleriesmedias = $this->gallery->galleriesmedias;
+        foreach ($galleriesmedias as $gallerymedia) {
+            $gallerymedia->delete();
+        }
         $gallery->delete();
         $this->addFlash('Gallerie supprimée', 'success');
         $this->redirect('cockpit_widget_galleries');
@@ -105,9 +120,8 @@ class GalleriesController extends CockpitController
 
     private function addMedias($medias)
     {
-        $count = count($this->gallery->galleriesmedias);
+        $count = count(c);
         foreach ($medias as $media_id) {
-            echo $media_id.'<br />';
             $gm = new GalleryMedia();
             $gm->gallery_id = $this->gallery->id;
             $gm->media_id = $media_id;

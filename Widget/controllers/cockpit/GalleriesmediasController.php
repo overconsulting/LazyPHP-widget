@@ -4,7 +4,6 @@ namespace Widget\controllers\cockpit;
 
 use app\controllers\cockpit\CockpitController;
 use Core\Router;
-use Core\Session;
 
 use Widget\models\GalleryMedia;
 use Widget\models\Gallery;
@@ -14,6 +13,11 @@ use Helper\Bootstrap;
 
 class GalleriesmediasController extends CockpitController
 {
+    /**
+     * @var string
+     */
+    private $pageTitle = '<i class="fa fa-picture-o fa-ciel"></i> Gestion des medias de la gallerie';
+
     /*
      * @var Widget\models\GalleryMedia
      */
@@ -26,31 +30,36 @@ class GalleriesmediasController extends CockpitController
             $this->galleryMedia->gallery_id = $galleryId;
         }
 
-        $this->render('widget::galleriesmedias::edit', array(
-            'id'            => 0,
-            'galleryMedia'  => $this->galleryMedia,
-            'galleryId'     => $galleryId,
-            'titleBox'      => 'Ajout media à la gallerie',
-            'pageTitle'     => 'Gestion Widget Gallerie',
-            'formAction'    => Router::url('cockpit_widget_galleriesmedias_create_'.$galleryId)
-        ));
+        $this->render(
+            'widget::galleriesmedias::edit',
+            array(
+                'id' => 0,
+                'galleryMedia' => $this->galleryMedia,
+                'galleryId' => $galleryId,
+                'pageTitle' => $this->pageTitle,
+                'boxTitle' => 'Ajout media à la gallerie',
+                'formAction' => Router::url('cockpit_widget_galleriesmedias_create_'.$galleryId)
+            )
+        );
     }
 
     public function editAction($galleryId, $id)
     {
-
         if ($this->galleryMedia === null) {
             $this->galleryMedia = GalleryMedia::findById($id);
         }
 
-        $this->render('widget::galleriesmedias::edit', array(
-            'id' => $id,
-            'galleryMedia' => $this->galleryMedia,
-            'galleryId' => $galleryId,
-            'titleBox'      => 'Modification media de la gallerie n°'.$galleryId,
-            'pageTitle'     => 'Gestion Widget Gallerie',
-            'formAction' => Router::url('cockpit_widget_galleriesmedias_update_'.$galleryId.'_'.$id)
-        ));
+        $this->render(
+            'widget::galleriesmedias::edit',
+            array(
+                'id' => $id,
+                'galleryMedia' => $this->galleryMedia,
+                'galleryId' => $galleryId,
+                'pageTitle' => $this->pageTitle,
+                'boxTitle' => 'Modification media de la gallerie',
+                'formAction' => Router::url('cockpit_widget_galleriesmedias_update_'.$galleryId.'_'.$id)
+            )
+        );
     }
 
     public function createAction($galleryId)
