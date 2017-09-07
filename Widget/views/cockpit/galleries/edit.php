@@ -1,4 +1,4 @@
-    <h1 class="page-title">{{ pageTitle }}</h1>
+<h1 class="page-title">{{ pageTitle }}</h1>
 
 <div class="box box-ciel">
     <div class="box-header">
@@ -22,7 +22,7 @@
     <div class="box-header">
         <h3 class="box-title">Medias de la gallerie</h3>
         <div class="box-tools pull-right">
-            {% button type="success" icon="picture-o" content="" size="sm" class="input-media-button" data-input-id="added_medias" data-select-multiple="1" data-media-type="image" data-on-valid="mediasAdded" data-multiple="1" %}
+            {% button type="success" icon="picture-o" content="" size="sm" class="input-media-button" data-input-id="added_medias" data-select-multiple="1" data-media-type="image" data-on-valid="galleryMediasAdded" data-multiple="1" %}
         </div>
     </div>
     <div class="box-body">

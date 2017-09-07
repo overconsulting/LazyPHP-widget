@@ -19,10 +19,8 @@ class GalleryWidget extends Widget
         $html = '';
 
         $id = 0;
-        if (!is_array($this->params)) {
-            $id = (int)$params;
-        } else if (isset($params['id'])) {
-            $id = (int)$params['id'];
+        if (isset($this->params['id'])) {
+            $id = (int)$this->params['id'];
         }
 
         if ($id != 0) {
