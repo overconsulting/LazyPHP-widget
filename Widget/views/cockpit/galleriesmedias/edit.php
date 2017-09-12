@@ -3,7 +3,7 @@
     <div class="box-header">
         <h3 class="box-title">{{ boxTitle }}</h3>
         <div class="box-tools pull-right">
-    		{% button url="cockpit_widget_galleries_edit_$galleryId$" type="secondary" icon="arrow-left" size="sm" content="" %}
+    		{% button url="cockpit_widget_galleries_edit_$galleryId$" type="secondary" icon="arrow-left" size="sm" hint="Retour" %}
 		</div>
 	</div>
 

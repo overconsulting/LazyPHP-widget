@@ -22,14 +22,19 @@ class GalleriesController extends CockpitController
 
     public function indexAction()
     {
-        $galleries = Gallery::findAll();
+        if ($this->site !== null) {
+            $where = 'site_id = '.$this->site->id;
+        } else {
+            $where = '';
+        }
+        $galleries = Gallery::findAll($where);
 
         $this->render(
             'widget::galleries::index',
             array(
                 'galleries' => $galleries,
                 'pageTitle' => $this->pageTitle,
-                'boxTitle'  => 'Liste des galleries'
+                'boxTitle' => 'Liste des galleries'
             )
         );
     }

@@ -4,7 +4,7 @@
     <div class="box-header">
         <h3 class="box-title">{{ boxTitle }}</h3>
         <div class="box-tools pull-right">
-            {% button url="cockpit_widget_galleries" type="secondary" size="sm" icon="arrow-left" content="" %}
+            {% button url="cockpit_widget_galleries" type="secondary" size="sm" icon="arrow-left" hint="Retour" %}
         </div>
     </div>
     <div class="box-body">
@@ -62,8 +62,8 @@ if ($galleriesmedias !== null && count($galleriesmedias) > 0) {
                 // '<td>'.$position.'</td>'.
                 '<td>'.$active.'</td>'.
                 '<td>';?>
-                    {% button url="cockpit_widget_galleriesmedias_edit_$gallery.id$_<?php echo $galleryMedia->id ?>" type="info" size="sm" icon="pencil" content="" %}
-                    {% button url="cockpit_widget_galleriesmedias_delete_$gallery.id$_<?php echo $galleryMedia->id ?>" type="danger" size="sm" icon="trash-o" confirmation="Vous confirmer vouloir supprimer ce media?" %}
+                    {% button url="cockpit_widget_galleriesmedias_edit_$gallery.id$_<?php echo $galleryMedia->id ?>" type="info" size="sm" icon="pencil" hint="Modifier" %}
+                    {% button url="cockpit_widget_galleriesmedias_delete_$gallery.id$_<?php echo $galleryMedia->id ?>" type="danger" size="sm" icon="trash-o" confirmation="Vous confirmer vouloir supprimer ce media ?" hint="Supprimer" %}
     <?php
     echo
             '</td>'.

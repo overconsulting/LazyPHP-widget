@@ -10,9 +10,7 @@ class Widget extends Model
         'label',
         'type',
         'app_widget',
-        'params',
-        'link',
-        'administrable'
+        'params'
     );
 
     public function setDefaultProperties()
