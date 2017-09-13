@@ -30,7 +30,7 @@ class PollQuestion extends Model
                     'model' => 'Widget\\models\\Poll',
                     'key' => 'poll_id'
                 ),
-                'pollanswers' => array(
+                'answers' => array(
                     'type' => '*',
                     'model' => 'Widget\\models\\PollAnswer',
                     'key' => 'pollquestion_id'
@@ -50,5 +50,14 @@ class PollQuestion extends Model
                 )
             )
         );
+    }
+
+    public function valid()
+    {
+        $res = parent::valid();
+
+        
+
+        return empty($this->errors);
     }
 }

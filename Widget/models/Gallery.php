@@ -7,6 +7,7 @@ use Core\Model;
 class Gallery extends Model
 {
     protected $permittedColumns = array(
+        'site_id',
         'title',
         'description'
     );
@@ -24,10 +25,28 @@ class Gallery extends Model
     public function getAssociations()
     {
         return array(
+            'site' => array(
+                'type' => '1',
+                'model' => 'Core\\models\\Site',
+                'key' => 'site_id',
+            ),
             'galleriesmedias' => array(
                 'type' => '*',
                 'model' => 'Widget\\models\\GalleryMedia',
                 'key' => 'gallery_id'
+            )
+        );
+    }
+
+    public function getValidations()
+    {
+        return array_merge(
+            parent::getValidations(),
+            array(
+                'title' => array(
+                    'type' => 'required',
+                    'error' => 'Titre obligatoire'
+                )
             )
         );
     }

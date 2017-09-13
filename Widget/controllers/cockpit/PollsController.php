@@ -21,6 +21,11 @@ class PollsController extends CockpitController
      */
     public $poll = null;
 
+    /*
+     * @var Widget\models\PollQuestion
+     */
+    public $pollQuestion = null;
+
     public function indexAction()
     {
         if ($this->site !== null) {
@@ -36,6 +41,23 @@ class PollsController extends CockpitController
                 'polls' => $polls,
                 'pageTitle' => $this->pageTitle,
                 'boxTitle'  => 'Liste des sondages'
+            )
+        );
+    }
+
+    public function showAction($id)
+    {
+        if ($this->poll === null) {
+            $this->poll = Poll::findById($id);
+        }
+
+        $this->render(
+            'widget::polls::show',
+            array(
+                'id' => 0,
+                'poll' => $this->poll,
+                'pageTitle' => $this->pageTitle,
+                'boxTitle' => 'Sondage'
             )
         );
     }
@@ -88,11 +110,14 @@ class PollsController extends CockpitController
     {
         $this->poll = new Poll();
 
-        if ($this->poll->save($this->request->post)) {
-            $this->addFlash('Sondage ajouté', 'success');
-            $this->redirect('cockpit_widget_polls');
-        } else {
+        if (!isset($this->request->post['site_id'])) {
+            $this->request->post['site_id'] = $this->site->id;
+        }
 
+        if ($this->poll->save($this->request->post)) {
+            $this->addFlash('Sondage ajouté<br />Vous pouvez ajouter les questions', 'success');
+            $this->redirect('cockpit_widget_polls_edit_'.$this->poll->id);
+        } else {
             $this->addFlash('Erreur(s) dans le formulaire', 'danger');
         }
 
@@ -102,6 +127,10 @@ class PollsController extends CockpitController
     public function updateAction($id)
     {
         $this->poll = Poll::findById($id);
+
+        if (!isset($this->request->post['site_id'])) {
+            $this->request->post['site_id'] = $this->site->id;
+        }
 
         if ($this->poll->save($this->request->post)) {
             $this->addFlash('Sondage modifié', 'success');
@@ -118,6 +147,6 @@ class PollsController extends CockpitController
         $poll = Poll::findById($id);
         $poll->delete();
         $this->addFlash('Sondage supprimé', 'success');
-        $this->redirect('cockpit_widget_poll');
+        $this->redirect('cockpit_widget_polls');
     }
 }

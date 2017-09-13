@@ -24,7 +24,7 @@ class Poll extends Model
                     'model' => 'Core\\models\\Site',
                     'key' => 'site_id'
                 ),
-                'pollquestions' => array(
+                'questions' => array(
                     'type' => '*',
                     'model' => 'Widget\\models\\PollQuestion',
                     'key' => 'poll_id'
@@ -54,8 +54,15 @@ class Poll extends Model
                     )
                 ),
                 'date_end' => array(
-                    'type' => 'required',
-                    'error' => 'Date fin obligatoire'
+                    array(
+                        'type' => 'required',
+                        'error' => 'Date fin obligatoire'
+                    ),
+                    array(
+                        'type' => 'datetime',
+                        'format' => 'Y-d-m H:i:s',
+                        'error' => 'Date invalide'
+                    )
                 )
             )
         );

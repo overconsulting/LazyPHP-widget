@@ -1,5 +1,5 @@
 <h1 class="page-title">{{ pageTitle }}</h1>
-<div class="box box-brown">
+<div class="box">
     <div class="box-header">
         <h3 class="box-title">{{ boxTitle }}</h3>
         <div class="box-tools pull-right">
@@ -16,5 +16,41 @@
             {% input_text name="date_end" model="poll.date_end" label="Date de fin" %}
             {% input_submit name="submit" value="save" formId="formPoll" class="btn-primary" icon="save" label="Enregistrer" %}
         {% form_close %}
+    </div>
+</div>
+<div class="box">
+    <div class="box-header">
+        <h3 class="box-title">Questions</h3>
+        <div class="box-tools pull-right">
+            {% button url="cockpit_widget_pollquestions_new_<?php echo $poll->id; ?>" type="success" size="sm" icon="plus" hint="Ajouter une question" %}
+        </div>
+    </div>
+    <div class="box-body">
+        <table class="table table-hover table-sm">
+            <thead>
+                <tr>
+                    <th>Question</th>
+                    <th>Réponses multiples</th>
+                    <th width="20%">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+<?php
+foreach ($poll->questions as $pollQuestion) {
+    echo
+        '<tr>'.
+            '<td>'.$pollQuestion->question.'</td>'.
+            '<td>'.$pollQuestion->multiple_answer.'</td>'.
+            '<td>';?>
+                {% button url="cockpit_widget_pollquestions_edit_<?php echo $poll->id ?>_<?php echo $pollQuestion->id ?>" type="info" size="sm" icon="pencil" hint="Modifier" %}
+                {% button url="cockpit_widget_pollquestions_delete_<?php echo $poll->id ?>_<?php echo $pollQuestion->id ?>" type="danger" size="sm" icon="trash-o" confirmation="Vous confirmer vouloir supprimer cette question ?" hint="Supprimer" %}
+<?php
+echo
+        '</td>'.
+    '</tr>';
+}
+?>
+            </tbody>
+        </table>
     </div>
 </div>

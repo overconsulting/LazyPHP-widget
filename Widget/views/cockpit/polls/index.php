@@ -7,7 +7,7 @@
         </div>
     </div>
     <div class="box-body">
-        <table class="table table-hover">
+        <table class="table table-hover table-sm">
             <thead>
                 <tr>
                     <th width="1%">ID</th>
@@ -23,6 +23,7 @@ foreach ($polls as $poll) {
             '<td>'.$poll->id.'</td>'.
             '<td>'.$poll->label.'</td>'.
             '<td>';?>
+                {% button url="cockpit_widget_polls_show_<?php echo $poll->id ?>" type="primary" size="sm" icon="eye" hint="Voir" %}
                 {% button url="cockpit_widget_polls_edit_<?php echo $poll->id ?>" type="info" size="sm" icon="pencil" hint="Modifier" %}
                 {% button url="cockpit_widget_polls_delete_<?php echo $poll->id ?>" type="danger" size="sm" icon="trash-o" confirmation="Vous confirmer vouloir supprimer ce sondage?" hint="Supprimer" %}
 <?php
