@@ -7,7 +7,7 @@ function pollquestionAddAnswer(event)
 {
     var button = event.currentTarget;
     var $inputGroups = $("input[name='answer[]']").parents(".input-group");
-    var $newInputGroup = $($inputGroups[0]).clone();
+    var $newInputGroup = $($inputGroups[0]).clone(true, true);
     
     $(button).before($newInputGroup);
     $newInputGroup.find("input[name='answer[]']")[0].id = "answer" + $inputGroups.length;
@@ -17,5 +17,7 @@ function pollquestionAddAnswer(event)
 function pollquestionDelAnswer(event)
 {
     var button = event.currentTarget;
-    
+    var answer = $(button).data("answer");
+    var $inputGroup = $("input#answer"+answer).parents(".input-group");
+    $inputGroup.remove();
 }
