@@ -58,5 +58,6 @@ class Widget
 
 Widget::addWidgetTypes(array(
     'gallery' => 'Widget\widgets\GalleryWidget',
-    'slider' => 'Widget\widgets\SliderWidget'
+    'slider' => 'Widget\widgets\SliderWidget',
+    'poll' => 'Widget\widgets\PollWidget',
 ));

@@ -9,15 +9,8 @@ class PollQuestion extends Model
     protected $permittedColumns = array(
         'poll_id',
         'question',
-        'answer0',
-        'answer1',
-        'answer2',
-        'answer3',
-        'answer4',
-        'answer5',
-        'answer6',
-        'answer7',
-        'multiple_answer'
+        'multiple_answer',
+        'answers'
     );
 
     public function getAssociations()
@@ -56,7 +49,20 @@ class PollQuestion extends Model
     {
         $res = parent::valid();
 
-        
+        for ($i = 0; $i < 8; $i++) {
+            $property = 'answer'.$i;
+            $this->$property = trim($this->$property);
+        }
+
+        if (!is_array($this->answers)) {
+            $this->answers = explode(';', $this->answers);
+        }
+
+        if (count($this->answers) < 2 || $this->answers[0] == '' || $this->answers[1] == '') {
+            $this->errors['answers'] = 'Deux réponses minimum par question';
+        }
+
+        $this->answers = implode(';', $this->answers);
 
         return empty($this->errors);
     }

@@ -41,9 +41,9 @@
             </thead>
             <tbody>
 <?php
-$galleriesmedias = $params['gallery']->galleriesmedias;
+$galleriesmedias = $gallery->galleriesmedias;
 if ($galleriesmedias !== null && count($galleriesmedias) > 0) {
-    foreach ($params['gallery']->galleriesmedias as $galleryMedia) {
+    foreach ($gallery->galleriesmedias as $galleryMedia) {
         if ($galleryMedia->active == 1) {
             $active = '<i class="fa fa-check"></i>';
         } else {

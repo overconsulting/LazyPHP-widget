@@ -1,0 +1,7 @@
+#formPollQuestion input[name='answer[]'] {
+	margin-bottom: 0.5em;
+}
+
+#formPollQuestion .pollquestion-del-answer {
+	margin-bottom: 0.5em;
+}

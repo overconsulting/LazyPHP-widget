@@ -25,6 +25,7 @@ class GalleryWidget extends Widget
 
         if ($id != 0) {
             $gallery = Gallery::findById($id);
+
             $viewFile = $this->getViewFile();
             ob_start();
             require $viewFile;

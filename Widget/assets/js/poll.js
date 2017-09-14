@@ -1,8 +1,21 @@
 $(document).ready(function() {
-	$(".poll-add-question").on("click", pollAddQuestion);
+    $(".pollquestion-add-answer").on("click", pollquestionAddAnswer);
+    $(".pollquestion-del-answer").on("click", pollquestionDelAnswer);
 });
 
-function pollAddQuestion()
+function pollquestionAddAnswer(event)
 {
-	alert("Add Question");
+    var button = event.currentTarget;
+    var $inputGroups = $("input[name='answer[]']").parents(".input-group");
+    var $newInputGroup = $($inputGroups[0]).clone();
+    
+    $(button).before($newInputGroup);
+    $newInputGroup.find("input[name='answer[]']")[0].id = "answer" + $inputGroups.length;
+    $newInputGroup.find(".pollquestion-del-answer").data("answer", $inputGroups.length);
+}
+
+function pollquestionDelAnswer(event)
+{
+    var button = event.currentTarget;
+    
 }
