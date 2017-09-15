@@ -1,4 +1,4 @@
-#formPollQuestion input[name='answer[]'] {
+#formPollQuestion input[name='answers[]'] {
 	margin-bottom: 0.5em;
 }
 

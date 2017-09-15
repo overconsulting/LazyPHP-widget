@@ -14,16 +14,26 @@
                 <label class="col-form-label col-form-label-sm col-sm-2">Réponses</label>
                 <div class="col-sm-10">
 <?php
+if (isset($pollQuestion->errors['answers'])) {
+    $errorHtml = '<div class="invalid-feedback" style="display: block;">'.$pollQuestion->errors['answers'].'</div>';
+    $errorClass = ' is-invalid';
+} else {
+    $errorHtml = '';
+    $errorClass = '';
+}
+
 for ($i = 0; $i < count($pollQuestion->answers); $i++) {
     echo 
         '<div class="input-group">'.
-            '<input id="answer'.$i.'" name="answer[]" value="" class="form-control form-control-sm" placeholder="" type="text" />'.
+            '<input id="answer'.$i.'" name="answers[]" value="'.$pollQuestion->answers[$i].'" class="form-control form-control-sm'.$errorClass.'" type="text" />'.
             '<span class="input-group-btn">'.
                 '{% button type="danger" size="sm" icon="remove" hint="Supprimer la réponse" class="pollquestion-del-answer" data-answer="'.$i.'" %}'.
             '</span>'.
         '</div>';
 }
-        
+
+echo $errorHtml;
+
 ?>
                     {% button type="success" size="sm" icon="plus" hint="Ajouter une réponse" class="pollquestion-add-answer" %}
                 </div>

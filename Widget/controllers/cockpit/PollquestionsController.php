@@ -33,6 +33,14 @@ class PollquestionsController extends CockpitController
             $this->pollQuestion->answers = array('', '');
         }
 
+        if (!is_array($this->pollQuestion->answers)) {
+            $this->pollQuestion->answers = explode(';', $this->pollQuestion->answers);
+        }
+
+        if (count($this->pollQuestion->answers) < 2) {
+            $this->pollQuestion->answers[] = '';
+        }
+
         $this->render(
             'widget::pollquestions::edit',
             array(
@@ -49,6 +57,9 @@ class PollquestionsController extends CockpitController
     {
         if ($this->pollQuestion === null) {
             $this->pollQuestion = PollQuestion::findById($id);
+        }
+
+        if (!is_array($this->pollQuestion->answers)) {
             $this->pollQuestion->answers = explode(';', $this->pollQuestion->answers);
         }
 
@@ -77,6 +88,10 @@ class PollquestionsController extends CockpitController
             $this->request->post['site_id'] = $this->site->id;
         }
 
+        if (!isset($this->request->post['multiple_answer'])) {
+            $this->request->post['multiple_answer'] = 0;
+        }
+
         if ($this->pollQuestion->save($this->request->post)) {
             $this->addFlash('Question ajoutée', 'success');
             $this->redirect('cockpit_widget_polls_edit_'.$pollId);
@@ -93,6 +108,10 @@ class PollquestionsController extends CockpitController
 
         if (!isset($this->request->post['site_id'])) {
             $this->request->post['site_id'] = $this->site->id;
+        }
+
+        if (!isset($this->request->post['multiple_answer'])) {
+            $this->request->post['multiple_answer'] = 0;
         }
 
         if ($this->pollQuestion->save($this->request->post)) {

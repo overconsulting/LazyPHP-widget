@@ -3,6 +3,7 @@
 namespace Widget\models;
 
 use Core\Model;
+use Core\Utils;
 
 class PollQuestion extends Model
 {
@@ -49,20 +50,16 @@ class PollQuestion extends Model
     {
         $res = parent::valid();
 
-        for ($i = 0; $i < 8; $i++) {
-            $property = 'answer'.$i;
-            $this->$property = trim($this->$property);
+        $answers = $this->answers;
+        if (!is_array($answers)) {
+            $answers = explode(';', $answers);
         }
 
-        if (!is_array($this->answers)) {
-            $this->answers = explode(';', $this->answers);
-        }
+        Utils::removeEmptyElements($answers);
 
-        if (count($this->answers) < 2 || $this->answers[0] == '' || $this->answers[1] == '') {
+        if (count($answers) < 2 || $answers[0] == '' || $answers[1] == '') {
             $this->errors['answers'] = 'Deux réponses minimum par question';
         }
-
-        $this->answers = implode(';', $this->answers);
 
         return empty($this->errors);
     }

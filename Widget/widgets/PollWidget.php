@@ -26,13 +26,15 @@ class PollWidget extends Widget
         if ($id != 0) {
             $poll = Poll::findById($id);
 
-            $viewFile = $this->getViewFile();
-            ob_start();
-            require $viewFile;
-            $html = ob_get_clean();
+            if ($poll !== null) {
+                $viewFile = $this->getViewFile();
+                ob_start();
+                require $viewFile;
+                $html = ob_get_clean();
 
-            $templator = new Templator();
-            $html = $templator->parse($html, array('poll' => $poll));
+                $templator = new Templator();
+                $html = $templator->parse($html, array('poll' => $poll));
+            }
         }
 
         return $html;
