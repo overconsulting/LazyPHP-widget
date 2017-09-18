@@ -28,6 +28,11 @@ class Poll extends Model
                     'type' => '*',
                     'model' => 'Widget\\models\\PollQuestion',
                     'key' => 'poll_id'
+                ),
+                'results' => array(
+                    'type' => '*',
+                    'model' => 'Widget\\models\\PollResult',
+                    'key' => 'poll_id'
                 )
             )
         );
@@ -66,5 +71,27 @@ class Poll extends Model
                 )
             )
         );
+    }
+
+    public function getStats()
+    {
+        $stats = array();
+
+        foreach ($this->results as $result) {
+            $qId = $result->question->id;
+            if (isset($stats[$qId][$result->answer])) {
+                $stats[$qId][$result->answer] = $stats[$qId][$result->answer] + 1;
+            }
+            else {
+                $stats[$qId][$result->answer] = 1;
+            }
+        }
+
+        foreach ($stats as $qId => $stat)
+        {
+            arsort($stats[$qId]);
+        }
+
+        return $stats;
     }
 }

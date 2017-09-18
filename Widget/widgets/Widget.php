@@ -10,9 +10,12 @@ class Widget
 
     public $params = array();
 
+    public $controller = null;
+
     public function __construct($params = array())
     {
         $this->params = $params;
+        $this->controller = isset($this->params['_controller']) ? $this->params['_controller'] : null;
     }
 
     public function getViewFile()

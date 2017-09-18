@@ -3,6 +3,7 @@
 namespace Widget\models;
 
 use Core\Model;
+use Widget\models\Poll;
 
 class PollResult extends Model
 {

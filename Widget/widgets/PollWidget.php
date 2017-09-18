@@ -4,6 +4,7 @@ namespace Widget\widgets;
 
 use Widget\widgets\Widget;
 use Widget\models\Poll;
+use Widget\models\PollResult;
 use Core\Templator;
 
 class PollWidget extends Widget
@@ -26,6 +27,19 @@ class PollWidget extends Widget
         if ($id != 0) {
             $poll = Poll::findById($id);
 
+            $currentUser = $this->controller->current_user;
+
+            if ($currentUser !== null) {
+                $isConnected = true;
+                $pollResults = PollResult::findAll('user_id = '.$currentUser->id.' and poll_id = '.$poll->id);
+                $hasAnswered = count($pollResults) > 0;
+            } else {
+                $isConnected = true;
+                $hasAnswered = false;
+            }
+
+            $pollStats = $poll->getStats();
+
             if ($poll !== null) {
                 $viewFile = $this->getViewFile();
                 ob_start();
@@ -33,7 +47,15 @@ class PollWidget extends Widget
                 $html = ob_get_clean();
 
                 $templator = new Templator();
-                $html = $templator->parse($html, array('poll' => $poll));
+                $html = $templator->parse(
+                    $html,
+                    array(
+                        'poll' => $poll,
+                        'isConnected' => $isConnected,
+                        'hasAnswered' => $hasAnswered,
+                        'pollStats' => $pollStats
+                    )
+                );
             }
         }
 

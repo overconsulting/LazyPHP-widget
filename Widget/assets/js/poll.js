@@ -51,6 +51,9 @@ function formPollUserSubmit(event)
 
 function formPollUserSubmitSuccess(data, textStatus, jqXHR)
 {
+    if (data.error) {
+        alert(data.message);
+    }
     console.log(data);
 }
 
