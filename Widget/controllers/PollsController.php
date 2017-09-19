@@ -34,6 +34,8 @@ class PollsController extends FrontController
                     $pollResult->answer = is_array($answer) ? implode(';', $answer) : $answer;
                     $pollResult->save();
                 }
+                $params['message'] = 'Merci pour votre participation';
+                $params['poll_id'] = $poll->id;
             } else {
                 $params['error'] = true;
                 $params['message'] = 'Erreur dans le formulaire';

@@ -78,18 +78,75 @@ class Poll extends Model
         $stats = array();
 
         foreach ($this->results as $result) {
-            $qId = $result->question->id;
-            if (isset($stats[$qId][$result->answer])) {
-                $stats[$qId][$result->answer] = $stats[$qId][$result->answer] + 1;
+            $question = $result->question;
+            $answerLabels = explode(';', $question->answers);
+            $qId = $question->id;
+            $rId = $result->answer;
+
+            $resultLabels = array();
+            $answers = explode(';', $result->answer);
+            foreach ($answers as $a) {
+                $resultLabels[] = $answerLabels[$a];
             }
-            else {
-                $stats[$qId][$result->answer] = 1;
+            $resultLabel = implode(', ', $resultLabels);
+
+            if (isset($stats[$qId])) {
+                $k = false;
+                for ($i = 0; $i < count($stats[$qId]['results']); $i++) {
+                    if ($stats[$qId]['results'][$i]['id'] == $rId) {
+                        $k = $i;
+                        break;
+                    }
+                }
+
+                if ($k !== false) {
+                    $stats[$qId]['results'][$k]['resultValue'] = $stats[$qId]['results'][$k]['resultValue'] + 1;
+                } else {
+                    $stats[$qId]['results'][] = array(
+                        'id' => $rId,
+                        'resultLabel' => $resultLabel,
+                        'resultValue' => 1
+                    );
+                }
+            } else {
+                $stats[$qId] = array(
+                    'question' => $question->question,                    
+                    'results' => array(
+                        array(
+                            'id' => $rId,
+                            'resultLabel' => $resultLabel,
+                            'resultValue' => 1
+                        )
+                    )
+
+                );
             }
         }
 
-        foreach ($stats as $qId => $stat)
-        {
-            arsort($stats[$qId]);
+        $bgColors = array('success', 'info', 'warning', 'danger');
+
+        foreach ($stats as $qId => $x) {
+            $max = 0;
+            $count = count($stats[$qId]['results']);
+
+            for ($i = 0; $i < $count; $i++) {
+                if ($stats[$qId]['results'][$i]['resultValue'] > $max) {
+                    $max = $stats[$qId]['results'][$i]['resultValue'];
+                }
+
+                for ($j = $i + 1; $j < $count - 1; $j++) {
+                    if ($stats[$qId]['results'][$i]['resultValue'] < $stats[$qId]['results'][$j]['resultValue']) {
+                        $a = $stats[$qId]['results'][$i];
+                        $stats[$qId]['results'][$i] = $stats[$qId]['results'][$j];
+                        $stats[$qId]['results'][$j] = $a;
+                    }
+                }
+            }
+
+            for ($i = 0; $i <  $count; $i++) {
+                $stats[$qId]['results'][$i]['bgColor'] = isset($bgColors[$i]) ? $bgColors[$i] : '';
+                $stats[$qId]['results'][$i]['percent'] = $stats[$qId]['results'][$i]['resultValue'] >= $max ? 100 : 100*$stats[$qId]['results'][$i]['resultValue'] / $max;
+            }
         }
 
         return $stats;

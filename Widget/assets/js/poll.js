@@ -51,10 +51,15 @@ function formPollUserSubmit(event)
 
 function formPollUserSubmitSuccess(data, textStatus, jqXHR)
 {
+    data = JSON.parse(data);
+    console.log(data);
     if (data.error) {
         alert(data.message);
+    } else {
+        alert(data.message);
+        $("#poll_widget_" + data.poll_id + " .poll-title").after('<div class="alert alert-info">Vous avez déjà répondu au sondage</div>');
+        $("#form_poll_user_send").parents(".form-group").remove();
     }
-    console.log(data);
 }
 
 function formPollUserSubmitError(jqXHR, textStatus, errorThrown)

@@ -1,7 +1,40 @@
 <div id="poll_widget_<?php echo $poll->id; ?>" class="widget widget-poll">
-    <h3><?php echo $poll->label != '' ? $poll->label : 'Sondage'; ?></h3>
-<?php if ($isConnected && !$hasAnswered): ?>
+<?php if ($showResults): ?>
+    <h3 class="poll-title"><?php echo $poll->label != '' ? $poll->label : 'Sondage'; ?> - Résultats</h3>
+    <div class="poll-results">
+        <?php foreach($pollStats as $pollStat): ?>
+            <div class="poll-question">
+                <div class="poll-question-question">
+                    <?php echo $pollStat['question']; ?>
+                </div>
+                <?php foreach($pollStat['results'] as $result): ?>
+                    <div class="poll-result">
+                        <div class="poll-result-label">
+                            <?php echo $result['resultLabel']; ?>
+                        </div>
+                        <div class="poll-result-value">
+                            <?php echo $result['resultValue']; ?>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar<?php echo $result['bgColor'] != '' ? ' bg-'.$result['bgColor'] : ''; ?>" style="width: <?php echo $result['percent']; ?>%;">
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        <?php endforeach; ?>
+    </div>
+<?php else: ?>
+    <h3 class="poll-title"><?php echo $poll->label != '' ? $poll->label : 'Sondage'; ?></h3>
+    <?php if ($isConnected): ?>
+        <?php if ($hasAnswered): ?>
+            <div class="alert alert-info">Vous avez déjà répondu au sondage</div>
+        <?php endif; ?>
+    <?php else: ?>
+        <div class="alert alert-info">Vous devez être connecté pour participer au sondage</div>
+    <?php endif; ?>
     {% form_open id="formPollUser" noBootstrapCol="1" %}
+        {% input_hidden name="poll_id" value="<?php echo $poll->id; ?>" %}
         <div class="poll-questions">
             <?php foreach($poll->questions as $question): ?>
 <?php
@@ -16,16 +49,9 @@ $input = '{% '.$inputType.' name="answers['.$question->id.']" options="'.$answer
                 </div>
             <?php endforeach; ?>
         </div>
-        {% input_hidden name="poll_id" value="<?php echo $poll->id; ?>" %}
-        {% input_submit id="form_poll_user_send" name="send" value="send" formId="formPollUser" class="btn-primary" icon="save" label="Envoyer" %}
+        <?php if ($isConnected && !$hasAnswered): ?>
+            {% input_submit id="form_poll_user_send" name="send" value="send" formId="formPollUser" class="btn-primary" icon="save" label="Envoyer" %}
+        <?php endif; ?>
     {% form_close %}
-<?php else: ?>
-    <div class="pol-results">
-        <?php foreach($poll->results as $result): ?>
-            <?php foreach($result->questions as $question): ?>
-                <div class=""
-            <?php endforeach; ?>
-        <?php endforeach; ?>
-    </div>
 <?php endif; ?>
 </div>

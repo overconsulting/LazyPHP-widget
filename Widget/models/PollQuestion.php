@@ -23,11 +23,6 @@ class PollQuestion extends Model
                     'type' => '1',
                     'model' => 'Widget\\models\\Poll',
                     'key' => 'poll_id'
-                ),
-                'answers' => array(
-                    'type' => '*',
-                    'model' => 'Widget\\models\\PollAnswer',
-                    'key' => 'pollquestion_id'
                 )
             )
         );
