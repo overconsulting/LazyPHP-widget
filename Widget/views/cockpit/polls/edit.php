@@ -18,6 +18,8 @@
         {% form_close %}
     </div>
 </div>
+
+<?php if (isset($poll->id)): ?>
 <div class="box">
     <div class="box-header">
         <h3 class="box-title">Questions</h3>
@@ -37,30 +39,34 @@
             </thead>
             <tbody>
 <?php
-foreach ($poll->questions as $pollQuestion) {
-    if ($pollQuestion->multiple_answer == 1) {
-        $multipleAnswer = '<i class="fa fa-check text-success"></i>';
-    } else {
-        $multipleAnswer = '<i class="fa fa-remove text-danger"></i>';
-    }
+$pollQuestions = $poll->questions;
+if ($pollQuestions !== null && count($pollQuestions) > 0) {
+    foreach ($poll->questions as $pollQuestion) {
+        if ($pollQuestion->multiple_answer == 1) {
+            $multipleAnswer = '<i class="fa fa-check text-success"></i>';
+        } else {
+            $multipleAnswer = '<i class="fa fa-remove text-danger"></i>';
+        }
 
-    $answers = explode(';', $pollQuestion->answers);
+        $answers = explode(';', $pollQuestion->answers);
 
-    echo
-        '<tr>'.
-            '<td>'.$pollQuestion->question.'</td>'.
-            '<td>'.$multipleAnswer.'</td>'.
-            '<td>'.count($answers).'</td>'.
-            '<td>';?>
-                {% button url="cockpit_widget_pollquestions_edit_<?php echo $poll->id ?>_<?php echo $pollQuestion->id ?>" type="info" size="sm" icon="pencil" hint="Modifier" %}
-                {% button url="cockpit_widget_pollquestions_delete_<?php echo $poll->id ?>_<?php echo $pollQuestion->id ?>" type="danger" size="sm" icon="trash-o" confirmation="Vous confirmer vouloir supprimer cette question ?" hint="Supprimer" %}
+        echo
+            '<tr>'.
+                '<td>'.$pollQuestion->question.'</td>'.
+                '<td>'.$multipleAnswer.'</td>'.
+                '<td>'.count($answers).'</td>'.
+                '<td>';?>
+                    {% button url="cockpit_widget_pollquestions_edit_<?php echo $poll->id ?>_<?php echo $pollQuestion->id ?>" type="info" size="sm" icon="pencil" hint="Modifier" %}
+                    {% button url="cockpit_widget_pollquestions_delete_<?php echo $poll->id ?>_<?php echo $pollQuestion->id ?>" type="danger" size="sm" icon="trash-o" confirmation="Vous confirmer vouloir supprimer cette question ?" hint="Supprimer" %}
 <?php
-echo
-        '</td>'.
-    '</tr>';
+    echo
+            '</td>'.
+        '</tr>';
+    }
 }
 ?>
             </tbody>
         </table>
     </div>
 </div>
+<?php endif; ?>

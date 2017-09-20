@@ -38,7 +38,7 @@ function formPollUserSubmit(event)
     var postData = new FormData(form);
 
     $.ajax({
-        url: "/widget/polls/send",
+        url: "/widget/wpolls/send",
         method: "post",
         data: postData,
         processData: false,
@@ -57,8 +57,9 @@ function formPollUserSubmitSuccess(data, textStatus, jqXHR)
         alert(data.message);
     } else {
         alert(data.message);
-        $("#poll_widget_" + data.poll_id + " .poll-title").after('<div class="alert alert-info">Vous avez déjà répondu au sondage</div>');
-        $("#form_poll_user_send").parents(".form-group").remove();
+        location.reload();
+        /*$("#poll_widget_" + data.poll_id + " .poll-title").after('<div class="alert alert-success">Vous avez déjà répondu au sondage</div>');
+        $("#form_poll_user_send").parents(".form-group").remove();*/
     }
 }
 

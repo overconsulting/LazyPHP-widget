@@ -8,7 +8,7 @@ use Core\models\Site;
 use Widget\models\Poll;
 use Widget\models\PollResult;
 
-class PollsController extends FrontController
+class WpollsController extends FrontController
 {
     public function sendAction()
     {

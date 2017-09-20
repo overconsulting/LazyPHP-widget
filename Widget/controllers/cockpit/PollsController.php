@@ -115,7 +115,7 @@ class PollsController extends CockpitController
         }
 
         if ($this->poll->save($this->request->post)) {
-            $this->addFlash('Sondage ajouté<br />Vous pouvez ajouter les questions', 'success');
+            $this->addFlash('Sondage créé<br />Vous pouvez ajouter les questions', 'success');
             $this->redirect('cockpit_widget_polls_edit_'.$this->poll->id);
         } else {
             $this->addFlash('Erreur(s) dans le formulaire', 'danger');

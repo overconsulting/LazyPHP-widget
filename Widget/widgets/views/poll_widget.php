@@ -28,15 +28,14 @@
     <h3 class="poll-title"><?php echo $poll->label != '' ? $poll->label : 'Sondage'; ?></h3>
     <?php if ($isConnected): ?>
         <?php if ($hasAnswered): ?>
-            <div class="alert alert-info">Vous avez déjà répondu au sondage</div>
-        <?php endif; ?>
-    <?php else: ?>
-        <div class="alert alert-info">Vous devez être connecté pour participer au sondage</div>
-    <?php endif; ?>
-    {% form_open id="formPollUser" noBootstrapCol="1" %}
-        {% input_hidden name="poll_id" value="<?php echo $poll->id; ?>" %}
-        <div class="poll-questions">
-            <?php foreach($poll->questions as $question): ?>
+            <p>Résultats le : <?php echo $poll->formatDatetime($poll->date_end, '%d/%m/%Y %H:%M:%S'); ?></p>
+            <!-- <div class="alert alert-info">Vous avez déjà répondu au sondage</div> -->
+        <?php else: ?>
+            <?php if (count($poll->questions) > 0): ?>
+                {% form_open id="formPollUser" noBootstrapCol="1" %}
+                    {% input_hidden name="poll_id" value="<?php echo $poll->id; ?>" %}
+                    <div class="poll-questions">
+                        <?php foreach($poll->questions as $question): ?>
 <?php
 $answerOptions = '['.$question->answers.']';
 
@@ -44,14 +43,21 @@ $inputType = $question->multiple_answer == 1 ? 'input_checkboxgroup' : 'input_ra
 
 $input = '{% '.$inputType.' name="answers['.$question->id.']" options="'.$answerOptions.'" label="'.$question->question.'" %}';
 ?>                
-                <div class="poll-question">
-                    <?php echo $input; ?>
-                </div>
-            <?php endforeach; ?>
-        </div>
-        <?php if ($isConnected && !$hasAnswered): ?>
-            {% input_submit id="form_poll_user_send" name="send" value="send" formId="formPollUser" class="btn-primary" icon="save" label="Envoyer" %}
+                            <div class="poll-question">
+                                <?php echo $input; ?>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                    <?php if ($isConnected && !$hasAnswered): ?>
+                        {% input_submit id="form_poll_user_send" name="send" value="send" formId="formPollUser" class="btn-primary" icon="save" label="Envoyer" %}
+                    <?php endif; ?>
+                {% form_close %}
+            <?php else: ?>
+                <div class="alert alert-info">Sondage bientôt en ligne</div>
+            <?php endif; ?>
         <?php endif; ?>
-    {% form_close %}
+    <?php else: ?>
+        <div class="alert alert-info">Vous devez être connecté pour participer au sondage</div>
+    <?php endif; ?>
 <?php endif; ?>
 </div>
