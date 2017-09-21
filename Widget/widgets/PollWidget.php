@@ -28,7 +28,7 @@ class PollWidget extends Widget
         if ($id != 0) {
             $poll = Poll::findById($id);
 
-            $currentUser = $this->controller->current_user;
+            $currentUser = isset($this->controller->current_user) ? $this->controller->current_user : null;
 
             if ($currentUser !== null) {
                 $isConnected = true;
