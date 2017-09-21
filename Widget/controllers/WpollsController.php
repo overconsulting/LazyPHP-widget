@@ -14,7 +14,7 @@ class WpollsController extends FrontController
     {
         $params = array(
             'error' => false,
-            'message' => $this->request->post
+            'message' => ''
         );
 
         if ($this->current_user === null) {
