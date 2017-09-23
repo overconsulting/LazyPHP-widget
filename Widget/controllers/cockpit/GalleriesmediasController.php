@@ -14,14 +14,14 @@ use Helper\Bootstrap;
 class GalleriesmediasController extends CockpitController
 {
     /**
+     * @var Widget\models\GalleryMedia
+     */
+    private $galleryMedia = null;
+
+    /**
      * @var string
      */
     private $pageTitle = '<i class="fa fa-picture-o fa-ciel"></i> Gestion des medias de la gallerie';
-
-    /*
-     * @var Widget\models\GalleryMedia
-     */
-    public $galleryMedia = null;
 
     public function newAction($galleryId)
     {

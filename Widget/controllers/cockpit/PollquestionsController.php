@@ -11,14 +11,14 @@ use Widget\models\PollQuestion;
 class PollquestionsController extends CockpitController
 {
     /**
+     * @var Widget\models\PollQuestion
+     */
+    private $pollQuestion = null;
+
+    /**
      * @var string
      */
     private $pageTitle = '<i class="fa fa-bar-chart-o"></i> Gestion des sondages';
-
-    /*
-     * @var Widget\models\PollQuestion
-     */
-    public $pollQuestion = null;
 
     public function indexAction($pollId)
     {

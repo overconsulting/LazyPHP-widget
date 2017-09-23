@@ -6,25 +6,19 @@ use app\controllers\cockpit\CockpitController;
 use Core\Router;
 use Core\models\Site;
 use Widget\models\Poll;
-use Widget\models\PollQuestion;
 use Widget\models\PollVote;
 
 class PollsController extends CockpitController
 {
     /**
+     * @var Widget\models\Poll
+     */
+    private $poll = null;
+
+    /**
      * @var string
      */
     private $pageTitle = '<i class="fa fa-bar-chart-o"></i> Gestion des sondages';
-
-    /*
-     * @var Widget\models\Poll
-     */
-    public $poll = null;
-
-    /*
-     * @var Widget\models\PollQuestion
-     */
-    public $pollQuestion = null;
 
     public function indexAction()
     {
@@ -79,7 +73,7 @@ class PollsController extends CockpitController
                 'boxTitle' => 'Nouveau sondage',
                 'formAction' => Router::url('cockpit_widget_polls_create'),
                 'siteOptions' => $siteOptions,
-                'selectSite' => $this->current_administrator->site_id === null
+                'selectSite' => $this->current_user->site_id === null
             )
         );
     }
@@ -101,7 +95,7 @@ class PollsController extends CockpitController
                 'boxTitle' => 'Modification sondage',
                 'formAction' => Router::url('cockpit_widget_polls_update_'.$id),
                 'siteOptions' => $siteOptions,
-                'selectSite' => $this->current_administrator->site_id === null
+                'selectSite' => $this->current_user->site_id === null
             )
         );
     }

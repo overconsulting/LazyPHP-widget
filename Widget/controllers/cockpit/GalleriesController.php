@@ -11,14 +11,14 @@ use Widget\models\GalleryMedia;
 class GalleriesController extends CockpitController
 {
     /**
+     * @var Widget\models\Gallery
+     */
+    private $gallery = null;
+
+    /**
      * @var string
      */
     private $pageTitle = '<i class="fa fa-picture-o fa-ciel"></i> Gestion des galleries';
-
-    /*
-     * @var Widget\models\Gallery
-     */
-    public $gallery = null;
 
     public function indexAction()
     {
