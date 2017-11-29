@@ -12,6 +12,9 @@ class WpollsController extends FrontController
 {
     public function sendAction()
     {
+        $pollClass = $this->loadModel('Poll');
+        $pollResultClass = $this->loadModel('PollResult');
+
         $params = array(
             'error' => false,
             'message' => ''
@@ -22,12 +25,12 @@ class WpollsController extends FrontController
             $params['message'] = 'Vous devez être connecté pour répondre au sondage';
         } else {
             if (isset($this->request->post['poll_id']) && isset($this->request->post['answers'])) {
-                $poll = Poll::findById($this->request->post['poll_id']);
+                $poll = $pollClass::findById($this->request->post['poll_id']);
 
                 $answers = $this->request->post['answers'];
                 foreach ($answers as $question_id => $answer)
                 {
-                    $pollResult = new PollResult();
+                    $pollResult = new $pollResultClass();
                     $pollResult->user_id = $this->current_user->id;
                     $pollResult->poll_id = $this->request->post['poll_id'];
                     $pollResult->question_id = $question_id;
@@ -38,7 +41,7 @@ class WpollsController extends FrontController
                 $params['poll_id'] = $poll->id;
             } else {
                 $params['error'] = true;
-                $params['message'] = 'Erreur dans le formulaire';
+                $params['message'] = 'Erreur(s) dans le formulaire';
             }
         }
 
