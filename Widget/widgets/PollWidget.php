@@ -20,10 +20,9 @@ class PollWidget extends Widget
     {
         $html = '';
 
-        $id = 0;
-        if (isset($this->params['id'])) {
-            $id = (int)$this->params['id'];
-        }
+        $id = isset($this->params['id']) ? (int)$this->params['id'] : 0;
+
+        $cockpit = isset($this->params['cockpit']) ? (bool)$this->params['cockpit'] : false;
 
         if ($id != 0) {
             $poll = Poll::findById($id);
@@ -41,7 +40,7 @@ class PollWidget extends Widget
 
             $ds = Datetime::stringToTimestamp($poll->date_start);
             $de = Datetime::stringToTimestamp($poll->date_end);
-            $showResults = time() > $de;    
+            $showResults = time() > $de;
 
             $pollStats = $poll->getStats();
 
@@ -56,6 +55,7 @@ class PollWidget extends Widget
                     $html,
                     array(
                         'poll' => $poll,
+                        'cockpit' => $cockpit,
                         'isConnected' => $isConnected,
                         'hasAnswered' => $hasAnswered,
                         'pollStats' => $pollStats,

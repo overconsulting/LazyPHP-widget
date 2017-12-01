@@ -7,6 +7,7 @@ use Core\Router;
 use Core\models\Site;
 use Widget\models\Poll;
 use Widget\models\PollVote;
+use Helper\Datetime;
 
 class PollsController extends CockpitController
 {
@@ -45,13 +46,20 @@ class PollsController extends CockpitController
             $this->poll = Poll::findById($id);
         }
 
+        $ds = Datetime::stringToTimestamp($this->poll->date_start);
+        $de = Datetime::stringToTimestamp($this->poll->date_end);
+        $pollFinished = time() > $de;
+
+        $participants = $this->poll->getParticipants();
+
         $this->render(
             'widget::polls::show',
             array(
-                'id' => 0,
-                'poll' => $this->poll,
                 'pageTitle' => $this->pageTitle,
-                'boxTitle' => 'Sondage'
+                'boxTitle' => 'Sondage',
+                'poll' => $this->poll,
+                'pollFinished' => $pollFinished,
+                'participants' => $participants
             )
         );
     }

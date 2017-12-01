@@ -1,6 +1,8 @@
 <div id="poll_widget_<?php echo $poll->id; ?>" class="widget widget-poll">
-<?php if ($showResults): ?>
-    <h3 class="poll-title"><?php echo $poll->label != '' ? $poll->label : 'Sondage'; ?> - Résultats</h3>
+<?php if ($showResults || $cockpit): ?>
+    <?php if (!$cockpit): ?>
+        <h3 class="poll-title"><?php echo $poll->label != '' ? $poll->label : 'Sondage'; ?> - Résultats</h3>
+    <?php endif; ?>
     <div class="poll-results">
         <?php foreach($pollStats as $pollStat): ?>
             <div class="poll-question">
@@ -25,7 +27,9 @@
         <?php endforeach; ?>
     </div>
 <?php else: ?>
-    <h3 class="poll-title"><?php echo $poll->label != '' ? $poll->label : 'Sondage'; ?></h3>
+    <?php if (!$cockpit): ?>
+        <h3 class="poll-title"><?php echo $poll->label != '' ? $poll->label : 'Sondage'; ?></h3>
+    <?php endif; ?>
     <?php if ($isConnected): ?>
         <?php if ($hasAnswered): ?>
             <p>Résultats le : <?php echo $poll->formatDatetime($poll->date_end, '%d/%m/%Y %H:%M:%S'); ?></p>

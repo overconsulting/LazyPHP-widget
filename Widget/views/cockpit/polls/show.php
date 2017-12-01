@@ -1,3 +1,10 @@
+<?php
+if($pollFinished) {
+    $status = '<span class="badge badge-success">Terminé</span>';
+} else {
+    $status = '<span class="badge badge-warning">En cours</span>';
+}
+?>
 <h1 class="page-title">{{ pageTitle }}</h1>
 <div class="box">
     <div class="box-header">
@@ -11,5 +18,9 @@
     <div class="box-body">
         <h3><?php echo $poll->label; ?></h3>
         <p>Du <?php echo $poll->formatDatetime($poll->date_start, '%d/%m/%Y %H:%M:%S'); ?> au <?php echo $poll->formatDatetime($poll->date_end, '%d/%m/%Y %H:%M:%S'); ?></p>
+        <p>Etat : <?php echo $status; ?></p>
+        <p>Participants : <?php echo $participants['participantCount'].' / '.$participants['userCount']; ?></p>
+        <hr />
+        {% widget type="poll" id="<?php echo $poll->id; ?>" cockpit="1" %}
     </div>
 </div>

@@ -151,4 +151,28 @@ class Poll extends Model
 
         return $stats;
     }
+
+    public function getParticipants()
+    {
+        if ($this->site_id !== null) {
+            $where = 'site_id = '.$this->site_id;
+        } else {
+            $where = '';
+        }
+
+        $userClass = $this->loadModel('User');
+        $userCount = count($userClass::findAll($where));
+
+        $participants = array();
+        foreach ($this->results as $result) {
+            if (!isset($participants[$result->user_id])) {
+                $participants[$result->user_id] = $result->user_id;
+            }
+        }
+
+        return array(
+            'participantCount' => count($participants),
+            'userCount' => $userCount
+        );
+    }
 }
