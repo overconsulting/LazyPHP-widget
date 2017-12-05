@@ -6,7 +6,7 @@ use Widget\widgets\Widget;
 use Widget\models\Poll;
 use Widget\models\PollResult;
 use Core\Templator;
-use Helper\Datetime;
+use Helper\DatetimeUtils;
 
 class PollWidget extends Widget
 {
@@ -38,8 +38,8 @@ class PollWidget extends Widget
                 $hasAnswered = false;
             }
 
-            $ds = Datetime::stringToTimestamp($poll->date_start);
-            $de = Datetime::stringToTimestamp($poll->date_end);
+            $ds = DatetimeUtils::stringToTimestamp($poll->date_start);
+            $de = DatetimeUtils::stringToTimestamp($poll->date_end);
             $showResults = time() > $de;
 
             $pollStats = $poll->getStats();
