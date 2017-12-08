@@ -9,6 +9,9 @@
     </div>
     <div class="box-body">
         {% form_open id="formGallery" action="formAction" %}
+<?php if ($selectSite): ?>
+           {% input_select name="site_id" model="gallery.site_id" label="Site" options="siteOptions" %}
+<?php endif; ?>
             {% input_text name="title" model="gallery.title" label="Titre" %}
             {% input_textarea name="description" model="gallery.description" label="Description" %}
             {% input_hidden id="added_medias" name="added_medias" value="" %}

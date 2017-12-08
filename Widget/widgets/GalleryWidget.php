@@ -40,6 +40,6 @@ class GalleryWidget extends Widget
 
     public static function getDbModel()
     {
-        return 'Widget\models\Gallery';
+        return 'Gallery';
     }
 }

@@ -41,9 +41,14 @@ class GalleriesController extends CockpitController
 
     public function newAction()
     {
+        $galeryClass = $this->loadModel('Gallery');
         if ($this->gallery === null) {
-            $this->gallery = new Gallery();
+            $this->gallery = new $galeryClass();
+            $this->gallery->site_id = $this->site->id;
         }
+
+        $siteClass = $this->loadModel('Site');
+        $siteOptions = $siteClass::getOptions();
 
         $this->render(
             'widget::galleries::edit',
@@ -52,16 +57,22 @@ class GalleriesController extends CockpitController
                 'gallery' => $this->gallery,
                 'pageTitle' => $this->pageTitle,
                 'boxTitle' => 'Nouvelle gallerie',
-                'formAction' => Router::url('cockpit_widget_galleries_create')
+                'formAction' => Router::url('cockpit_widget_galleries_create'),
+                'siteOptions' => $siteOptions,
+                'selectSite' => $this->current_user->site_id === null
             )
         );
     }
 
     public function editAction($id)
     {
+        $galeryClass = $this->loadModel('Gallery');
         if ($this->gallery === null) {
-            $this->gallery = Gallery::findById($id);
+            $this->gallery = $galeryClass::findById($id);
         }
+
+        $siteClass = $this->loadModel('Site');
+        $siteOptions = $siteClass::getOptions();
 
         $this->render(
             'widget::galleries::edit',
@@ -70,14 +81,23 @@ class GalleriesController extends CockpitController
                 'gallery' => $this->gallery,
                 'pageTitle' => $this->pageTitle,
                 'boxTitle' => 'Modification gallerie',
-                'formAction' => Router::url('cockpit_widget_galleries_update_'.$id)
+                'formAction' => Router::url('cockpit_widget_galleries_update_'.$id),
+                'siteOptions' => $siteOptions,
+                'selectSite' => $this->current_user->site_id === null
             )
         );
     }
 
     public function createAction()
     {
-        $this->gallery = new Gallery();
+        $galeryClass = $this->loadModel('Gallery');
+        if ($this->gallery === null) {
+            $this->gallery = new $galeryClass();
+        }
+
+        if (!isset($this->request->post['site_id'])) {
+            $this->request->post['site_id'] = $this->site->id;
+        }
 
         // $addedMedias = $this->request->post['added_medias'] != '' ? explode(',', $this->request->post['added_medias']) : array();
 
@@ -96,7 +116,14 @@ class GalleriesController extends CockpitController
 
     public function updateAction($id)
     {
-        $this->gallery = Gallery::findById($id);
+        $galeryClass = $this->loadModel('Gallery');
+        if ($this->gallery === null) {
+            $this->gallery = $galeryClass::findById($id);
+        }
+
+        if (!isset($this->request->post['site_id'])) {
+            $this->request->post['site_id'] = $this->site->id;
+        }
 
         $addedMedias = $this->request->post['added_medias'] != '' ? explode(',', $this->request->post['added_medias']) : array();
 
@@ -113,11 +140,8 @@ class GalleriesController extends CockpitController
 
     public function deleteAction($id)
     {
-        $gallery = Gallery::findById($id);
-        $galleriesmedias = $this->gallery->galleriesmedias;
-        foreach ($galleriesmedias as $gallerymedia) {
-            $gallerymedia->delete();
-        }
+        $galeryClass = $this->loadModel('Gallery');
+        $gallery = $galeryClass::findById($id);
         $gallery->delete();
         $this->addFlash('Gallerie supprimée', 'success');
         $this->redirect('cockpit_widget_galleries');
@@ -125,9 +149,10 @@ class GalleriesController extends CockpitController
 
     private function addMedias($medias)
     {
-        $count = count(c);
+        $galeryMediaClass = $this->loadModel('GalleryMedia');
+        $count = count($this->gallery->medias);        
         foreach ($medias as $media_id) {
-            $gm = new GalleryMedia();
+            $gm = new $galeryMediaClass();
             $gm->gallery_id = $this->gallery->id;
             $gm->media_id = $media_id;
             $gm->position = $count;

@@ -70,6 +70,6 @@ class PollWidget extends Widget
 
     public static function getDbModel()
     {
-        return 'Widget\models\Poll';
+        return 'Poll';
     }
 }

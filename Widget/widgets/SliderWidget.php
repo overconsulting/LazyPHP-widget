@@ -15,6 +15,6 @@ class SliderWidget extends Widget
 
     public static function getDbModel()
     {
-        return 'Widget\models\Slider';
+        return 'Slider';
     }
 }
