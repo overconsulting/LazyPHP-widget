@@ -1,3 +1,29 @@
 #gallery_medias td img {
 	height: 50px;
 }
+
+.widget-gallery .gallery-media {
+	position: relative;
+	border: solid 1px #808080;
+	border-radius: 5px;
+	padding: 10px;
+}
+
+.widget-gallery .gallery-media:hover::after {
+	display: block;
+}
+
+.widget-gallery .gallery-media::after {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.25);
+	content: "";
+}
+
+.widget-gallery .gallery-media-title {
+	text-align: center;
+}

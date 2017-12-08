@@ -12,8 +12,8 @@
             {% input_select name="site_id" model="poll.site_id" label="Site" options="siteOptions" %}
 <?php endif; ?>
             {% input_text name="label" model="poll.label" label="Nom" %}
-            {% input_text name="date_start" model="poll.date_start" label="Date de début" %}
-            {% input_text name="date_end" model="poll.date_end" label="Date de fin" %}
+            {% input_datetime name="date_start" model="poll.date_start" label="Date de début" %}
+            {% input_datetime name="date_end" model="poll.date_end" label="Date de fin" %}
             {% input_submit name="submit" value="save" formId="formPoll" class="btn-primary" icon="save" label="Enregistrer" %}
         {% form_close %}
     </div>

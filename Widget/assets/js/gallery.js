@@ -4,3 +4,7 @@ function galleryMediasAdded()
     submitButton.click();
     return true;
 }
+
+$(document).ready(function() {
+});
+
