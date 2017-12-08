@@ -1,6 +1,10 @@
 <?php
 
-echo '<div id="gallery_widget_'.$gallery->id.'" class="widget widget-gallery row">';
+echo 
+    '<div id="gallery_widget_'.$gallery->id.'" class="widget widget-gallery row">'.
+        '<div class="col-lg-12">'.
+            '<h2>'.$gallery->title.'</h2>'.
+        '</div>';
 
 $gallery->galleriesmedias;
 if (!empty($gallery->galleriesmedias)) {
