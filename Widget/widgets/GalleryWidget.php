@@ -37,9 +37,20 @@ class GalleryWidget extends Widget
 
         return $html;
     }
-
-    public static function getDbModel()
-    {
-        return 'Gallery';
-    }
 }
+
+Widget::addWidgetTypes(array(
+    'gallery' => array(
+        'type' => 'gallery',
+        'class' => 'Widget\widgets\GalleryWidget',
+        'label' => 'Gallerie',
+        'params' => array(
+            'id' => array(
+                'name' => 'id',
+                'label' => 'Gallerie',
+                'type' => 'table',
+                'model' => 'Gallery'
+            )
+        )
+    )
+));

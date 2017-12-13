@@ -4,7 +4,7 @@ namespace Widget\models;
 
 use Core\Model;
 
-class GalleryMedia extends Widget
+class GalleryMedia extends Model
 {
     protected $permittedColumns = array(
         'gallery_id',

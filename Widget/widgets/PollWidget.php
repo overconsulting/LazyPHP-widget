@@ -67,9 +67,20 @@ class PollWidget extends Widget
 
         return $html;
     }
-
-    public static function getDbModel()
-    {
-        return 'Poll';
-    }
 }
+
+Widget::addWidgetTypes(array(
+    'poll' => array(
+        'type' => 'poll',
+        'class' => 'Widget\\widgets\\PollWidget',
+        'label' => 'Sondage',
+        'params' => array(
+            'id' => array(
+                'name' => 'id',
+                'label' => 'Sondage',
+                'type' => 'table',
+                'model' => 'Poll'
+            )
+        )
+    )
+));

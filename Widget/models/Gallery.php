@@ -50,4 +50,9 @@ class Gallery extends Model
             )
         );
     }
+
+    public function getOptionLabel()
+    {
+        return $this->title;
+    }    
 }

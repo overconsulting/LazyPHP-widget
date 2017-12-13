@@ -36,17 +36,19 @@ class Widget
         return '<div class="widget widget-'.$this->type.'"></div>';
     }
 
-    public static function addWidgetTypes($types) {
+    public static function addWidgetTypes($types)
+    {
         self::$widgetTypes = array_merge(self::$widgetTypes, $types);
     }
 
-    public static function addWidgetType($type) {
+    public static function addWidgetType($type)
+    {
         self::$widgetTypes = array_merge(self::$widgetTypes, $type);
     }
 
     public static function getWidget($type, $params = array())
     {
-        $class = self::$widgetTypes[$type];
+        $class = self::$widgetTypes[$type]['class'];
         $widget = new $class($params);
         return $widget;
     }
@@ -58,9 +60,3 @@ class Widget
         return $widget->getHtml();
     }
 }
-
-Widget::addWidgetTypes(array(
-    'gallery' => 'Widget\widgets\GalleryWidget',
-    'slider' => 'Widget\widgets\SliderWidget',
-    'poll' => 'Widget\widgets\PollWidget',
-));
