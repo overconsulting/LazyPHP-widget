@@ -58,9 +58,9 @@
 #gallery_popup .gallery-popup-arrow {
 	background: transparent;
 	position: absolute;
-	top: 5%;
+	top: 10%;
 	width: 4rem;
-	height: 90%;
+	height: 80%;
 	font-size: 2rem;
 	padding-right: 1rem;
 	padding-left: 1rem;
