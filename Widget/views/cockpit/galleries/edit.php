@@ -14,6 +14,8 @@
 <?php endif; ?>
             {% input_text name="title" model="gallery.title" label="Titre" %}
             {% input_textarea name="description" model="gallery.description" label="Description" %}
+            {% input_checkbox name="in_phototheque" model="gallery.in_phototheque" label="Ajouter à la photothèque" %}
+            {% input_checkbox name="une" model="gallery.une" label="En présentation" %}
             {% input_hidden id="added_medias" name="added_medias" value="" %}
             {% input_submit name="submit" value="save" formId="formGallery" class="btn-primary" icon="save" label="Enregistrer" %}
         {% form_close %}

@@ -9,7 +9,9 @@ class Gallery extends Model
     protected $permittedColumns = array(
         'site_id',
         'title',
-        'description'
+        'description',
+        'in_phototheque',
+        'une'
     );
 
     public static function getTableName()

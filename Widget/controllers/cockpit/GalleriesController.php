@@ -99,6 +99,10 @@ class GalleriesController extends CockpitController
             $this->request->post['site_id'] = $this->site->id;
         }
 
+        if (!isset($this->request->post['in_phototheque'])) {
+            $this->request->post['in_phototheque'] = 0;
+        }
+
         // $addedMedias = $this->request->post['added_medias'] != '' ? explode(',', $this->request->post['added_medias']) : array();
 
         if ($this->gallery->save($this->request->post)) {
@@ -123,6 +127,10 @@ class GalleriesController extends CockpitController
 
         if (!isset($this->request->post['site_id'])) {
             $this->request->post['site_id'] = $this->site->id;
+        }
+
+        if (!isset($this->request->post['in_phototheque'])) {
+            $this->request->post['in_phototheque'] = 0;
         }
 
         $addedMedias = $this->request->post['added_medias'] != '' ? explode(',', $this->request->post['added_medias']) : array();
