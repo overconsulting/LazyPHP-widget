@@ -11,7 +11,8 @@ class Gallery extends Model
         'title',
         'description',
         'in_phototheque',
-        'une'
+        'une',
+        'media_id',
     );
 
     public static function getTableName()
@@ -31,6 +32,11 @@ class Gallery extends Model
                 'type' => '1',
                 'model' => 'Core\\models\\Site',
                 'key' => 'site_id',
+            ),
+            'media' => array(
+                'type' => '1',
+                'model' => 'Media\\models\\Media',
+                'key' => 'media_id',
             ),
             'galleriesmedias' => array(
                 'type' => '*',
@@ -56,5 +62,5 @@ class Gallery extends Model
     public function getOptionLabel()
     {
         return $this->title;
-    }    
+    }
 }

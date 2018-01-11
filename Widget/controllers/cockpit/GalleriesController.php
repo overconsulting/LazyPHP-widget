@@ -99,10 +99,15 @@ class GalleriesController extends CockpitController
             $this->request->post['site_id'] = $this->site->id;
         }
 
-        if (!isset($this->request->post['in_phototheque'])) {
+
+
+        if(!isset($this->request->post['in_phototheque'])) {
             $this->request->post['in_phototheque'] = 0;
         }
 
+        if(!isset($this->request->post['une'])) {
+            $this->request->post['une'] = 0;
+        }
         // $addedMedias = $this->request->post['added_medias'] != '' ? explode(',', $this->request->post['added_medias']) : array();
 
         if ($this->gallery->save($this->request->post)) {
@@ -129,8 +134,12 @@ class GalleriesController extends CockpitController
             $this->request->post['site_id'] = $this->site->id;
         }
 
-        if (!isset($this->request->post['in_phototheque'])) {
+        if(isset($this->request->post['in_phototheque']) && $this->request->post['in_phototheque'] == '' ) {
             $this->request->post['in_phototheque'] = 0;
+        }
+
+        if(isset($this->request->post['une']) && $this->request->post['une'] == '' ) {
+            $this->request->post['une'] = 0;
         }
 
         $addedMedias = $this->request->post['added_medias'] != '' ? explode(',', $this->request->post['added_medias']) : array();
@@ -158,7 +167,7 @@ class GalleriesController extends CockpitController
     private function addMedias($medias)
     {
         $galeryMediaClass = $this->loadModel('GalleryMedia');
-        $count = count($this->gallery->medias);        
+        $count = count($this->gallery->medias);
         foreach ($medias as $media_id) {
             $gm = new $galeryMediaClass();
             $gm->gallery_id = $this->gallery->id;
