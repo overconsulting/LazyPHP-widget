@@ -19,8 +19,8 @@ class ButtonWidget extends Widget
 
         $url = isset($this->params['url']) ? ' url="'.$this->params['url'].'"' : '';
         $content = isset($this->params['text']) ? $this->params['text'] : '';
-        
-        $html = '{% button type="secondary" content="'.$content.'"'.$url.' class="widget-button" %}';
+
+        $html = '{% button type="primary" content="'.$content.'"'.$url.' class="widget-button" %}';
 
         $templator = new Templator();
         $html = $templator->parse($html);
