@@ -6,7 +6,7 @@ if($pollFinished) {
 }
 ?>
 <h1 class="page-title">{{ pageTitle }}</h1>
-<div class="box">
+<div class="box box-poll">
     <div class="box-header">
         <h3 class="box-title">{{ boxTitle }}</h3>
         <div class="box-tools pull-right">

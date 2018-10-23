@@ -18,7 +18,7 @@ class PollquestionsController extends CockpitController
     /**
      * @var string
      */
-    private $pageTitle = '<i class="fa fa-bar-chart-o"></i> Gestion des sondages';
+    private $pageTitle = '<i class="fa fa-bar-chart-o fa-poll"></i> Gestion des sondages';
 
     public function indexAction($pollId)
     {
